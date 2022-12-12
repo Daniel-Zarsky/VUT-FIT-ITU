@@ -5,10 +5,11 @@
     <meta name="keywords" content="New task">
     <meta name="description" content="">
     <title>Page 2</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="Page-2.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery-1.9.1.min.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    {% load static %}
+    <link rel="stylesheet"  href="{% static 'to_do_list/nicepage.css' %}" media="screen">
+<link rel="stylesheet"href="{% static 'to_do_list/Page-2.css' %}" media="screen">
+    <script class="u-script" type="text/javascript" src="{% static 'to_do_list/jquery-1.9.1.min.js' %}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{% static 'to_do_list/nicepage.js' %}" defer=""></script>
     <meta name="generator" content="Nicepage 5.1.5, nicepage.com">
     <meta name="referrer" content="origin">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -19,7 +20,7 @@
 		"@type": "Organization",
 		"name": "",
 		"url": "/",
-		"logo": "images/default-logo.png"
+		"logo": "{% static 'to_do_list/images/default-logo.png'%}"
 }</script>
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="Page 2">
@@ -28,7 +29,7 @@
   </head>
   <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-1255"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="https://nicepage.com" class="u-image u-logo u-image-1">
-          <img src="images/default-logo.png" class="u-logo-image u-logo-image-1">
+          <img src="{% static 'to_do_list/images/default-logo.png' %}" class="u-logo-image u-logo-image-1">
         </a>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
@@ -61,7 +62,7 @@
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
           </div>
         </nav>
-        <a href="https://nicepage.com/website-templates" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">ADD NEW TASK</a>
+
       </div></header>
     <section class="u-clearfix u-section-1" id="sec-4bb9">
       <div class="u-clearfix u-sheet u-sheet-1">
@@ -194,7 +195,7 @@
               </div>
             </div>
             <div class="u-align-left u-form-group u-form-submit">
-              <a href="#" class="u-btn u-btn-submit u-button-style">Submit</a>
+              <a href="{% url 'submit_task' %}" class="u-btn u-btn-submit u-button-style">Submit</a>
               <input type="submit" value="submit" class="u-form-control-hidden">
             </div>
             <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
@@ -203,8 +204,8 @@
             <input type="hidden" name="formServices" value="3f760d8d42330635c056e21f41d6aa65">
           </form>
         </div>
-        <a href="https://nicepage.com/c/pets-animals-html-templates" class="u-btn u-button-style u-btn-2" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Delete</a>
-        <a href="https://nicepage.com/joomla-page-builder" class="u-btn u-button-style u-btn-3" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Save</a>
+        <a href="{% url 'delete_task' %}" class="u-btn u-button-style u-btn-2" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Delete</a>
+        <a href="{% url 'save_task' %}" class="u-btn u-button-style u-btn-3" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Save</a>
       </div>
     </section>
     
