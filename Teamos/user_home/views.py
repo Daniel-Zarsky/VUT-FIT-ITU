@@ -12,4 +12,10 @@ def home(request):
 def redirect_teams(request):
     return redirect("/teams")
 
+def redirect_todo(request):
+    return redirect("/to_do_list")
+
+def redirect_projects(request):
+    return redirect("/projects")
+
 # Create your views here.

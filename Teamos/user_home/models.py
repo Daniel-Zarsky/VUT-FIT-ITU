@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+
+class User_acc(models.Model):
+    name = models.CharField(max_length=100)
+    member = models.TextField(null=True)
+    img = models.ImageField(upload_to="media/")
