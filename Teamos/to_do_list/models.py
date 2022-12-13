@@ -1,10 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 # Create your models here.
 class Task(models.Model):
-    user= models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    #team=  models.ForeignKey(Team, on_delete=models.CASCADE, null=True, blank=True)
+    user= models.CharField(max_length=100)
+    team= models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     done = models.BooleanField(default=False)
@@ -12,7 +11,7 @@ class Task(models.Model):
     priority = models.IntegerField()
 
     def _str_(self):
-        return self.title
-
+         return self.title
     class Meta:
-        ordering =['complete']
+         ordering = ['priority']
+
