@@ -1,16 +1,16 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Task
-from django.views.generic.list import ListView
+#from django.views.generic.list import ListView
 @login_required(login_url='login')
 def tasklist(request):
     return render(request, 'to_do_list/Page-1.html')
 
-class List_of_tasks(ListView):
-    model = Task
-    context_name = 'tasks'
+# class List_of_tasks(ListView):
+#     model = Task
+#     context_name = 'tasks'
 
-def addtask(request):
+def addTask(request):
     if request.method == 'POST':
         name = request.POST['task_name']
         description= request.POST['task_description']
