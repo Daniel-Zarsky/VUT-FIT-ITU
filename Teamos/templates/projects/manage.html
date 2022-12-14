@@ -1,27 +1,13 @@
 <!DOCTYPE html>
 {% load static %}
-
 <html style="font-size: 16px;" lang="en"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Enter please name of the project">
+    <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>Page 3</title>
-    <style>
-	.center {
-  margin: 0;
-  position: absolute;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-</style>
+    <title>Page 2</title>
     <link rel="stylesheet" href="{% static 'projects/nicepage.css' %}" media="screen">
-    <link rel="stylesheet" href="{% static 'projects/Page-3.css' %}" media="screen">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <link rel="stylesheet" href="{% static 'projects/style.css' %}">
-    <script class="u-script" type="text/javascript" src="{% static 'projects/jquery.js' %}" defer=""></script>
-    <script class="u-script" type="text/javascript" src="{% static 'projects/nicepage.js' %}" defer=""></script>
+<link rel="stylesheet" href="{% static 'projects/Page-2.css' %}" media="screen">
     <meta name="generator" content="Nicepage 5.1.5, nicepage.com">
     <meta name="referrer" content="origin">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -34,11 +20,10 @@
 		"logo": "images/default-logo.png"
 }</script>
     <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Page 3">
+    <meta property="og:title" content="Page 2">
     <meta property="og:type" content="website">
   </head>
-<body>
-<body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-b4e3"><div class="u-clearfix u-sheet u-sheet-1">
+  <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-b4e3"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="https://nicepage.com" class="u-image u-logo u-image-1">
           <img src="{% static 'projects/images/default-logo.png' %}" class="u-logo-image u-logo-image-1">
         </a>
@@ -70,49 +55,45 @@
           </div>
         </nav>
       </div></header>
-<!-- partial:index.partial.html -->
-<section id=timeline>
-	<h1>Project timeline for project {{project_name}}</h1>
-	<div class="demo-card-wrapper">
-		<div class="demo-card demo-card--step1">
-			<div class="head">
-				<div class="number-box">
-					<span></span>
-				</div>
-				<h2><span class="small">The Beginning?</span>{{data_proj.start_of_project}} </h2>
-			</div>
-			<div class="body">
-				<p>Start of your project, it will be fun</p>
-			</div>
-		</div>
-		{% for data in list_data %}
-		<div class="demo-card demo-card--step2">
-			<div class="head">
-				<div class="number-box">
-					<span></span>
-				</div>
-				<h2><span class="small">{{data.deadline_name}}</span> {{data.deadline}}</h2>
-			</div>
-			<div class="body">
-				<p>{{data.deadline_text}}</p>
-			</div>
-		</div>
+    <section class="u-clearfix u-section-1" id="carousel_2fcb">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h3 class="u-text u-text-default u-text-1">Project {{data.name}}</h3>
+        <a href="delete_project?project_name={{data.name}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-2-dark-1 u-radius-50 u-btn-1">Delete project</a>
+        <h3 class="u-text u-text-default u-text-2">Manage deadlines</h3>
+        <div class="u-form u-form-1">
+          <form action="manage_deadlines?project_name={{data.name}}" method="post" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" name="form" style="padding: 10px;">
+                {% csrf_token %}
+              <div class="u-form-group u-form-name">
+              <label for="name-3764" class="u-label">Deadline</label>
+              <input type="text" placeholder="Enter deadline's name" id="name-3764" name="deadline" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+            </div>
+            <div class="u-form-email u-form-group">
+              <label for="email-3764" class="u-label">Date</label>
+              <input type="date" placeholder="Enter a valid date" id="email-3764" name="date" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+            </div>
+            <div class="u-form-group u-form-message">
+              <label for="message-3764" class="u-label">Description</label>
+              <textarea placeholder="Enter deadline description" rows="4" cols="50" id="message-3764" name="message" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required=""></textarea>
+            </div>
+            <div class="u-align-center u-form-group u-form-submit">
+              <input type="submit" value="Create new deadline" class="u-btn u-btn-submit u-button-style">
+            </div>
+            <input type="hidden" value="" name="recaptchaResponse">
+            <input type="hidden" name="formServices" value="f24b4b66988b1e3b02ebfd15a8bf1352">
+          </form>
+        </div>
+          {% for date,message,name in deadlines_data %}
+        <div class="u-container-style u-group u-palette-1-base u-radius-10 u-shape-round u-group-1">
+          <div class="u-container-layout u-container-layout-1"><a href="delete_deadline?project_name={{data.name}}&deadline_name={{name}}"> <span class="u-file-icon u-icon u-icon-1"><img src="{% static 'projects/images/1828665.png' %}" alt=""></span> </a>
+            <h3 class="u-text u-text-default u-text-3">{{name}}</h3>
+            <p class="u-align-center u-text u-text-4">{{date}}</p>
+            <p class="u-align-center u-text u-text-5">{{message}}</p>
+          </div>
+        </div>
+          {% endfor %}
+      </div>
+         <a href="show_timeline?project_name={{data.name}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1"> Back</a>
+    </section>
 
-		{% endfor %}
 
-		<div class="demo-card demo-card--step3">
-			<div class="head">
-				<div class="number-box">
-					<span>05</span>
-				</div>
-				<h2><span class="small">The End... Again...</span> {{data_proj.final_deadline}}</h2>
-			</div>
-			<div class="body">
-				<p>You can sleep now</p>
-			</div>
-		</div>
-	</div>
-	<a href="manage_deadlines?project_name={{project_name}}" class="u-btn u-btn-submit u-button-style center">Manage project</a>
-</section>
-</body>
-</html>
+</body></html>

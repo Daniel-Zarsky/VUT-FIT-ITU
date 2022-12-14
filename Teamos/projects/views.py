@@ -50,10 +50,35 @@ def create_new(request):
     return render(request, 'projects/create_new.html', {'teams' : match})
 
 def show_timeline(request):
+    class time_line():
+        def __init__(self, deadline, deadline_name, deadline_text):
+            self.deadline = deadline
+            self.deadline_name = deadline_name
+            self.deadline_text = deadline_text
+
+    jsonDec = json.decoder.JSONDecoder()
     project_name = request.GET.get('project_name')
     project = Project_list.objects.get(name=project_name)
     tasks = Task.objects.filter(project=project_name)
-    return render(request, 'projects/deadlines.html', {'project_name' : project_name, 'data_proj' : project})
+
+    data = []
+
+    if project.deadlines is not None:
+        project_deadline = jsonDec.decode(project.deadlines)
+        project_deadline_text = jsonDec.decode(project.deadlines_text)
+        project_deadline_name = jsonDec.decode(project.deadlines_name)
+
+        for dead,text,name in list(zip_longest(project_deadline, project_deadline_text, project_deadline_name)):
+            data.append(time_line(dead, text, name))
+
+
+    for item in tasks:
+        data.append(time_line(item.deadline, item.description, item.name))
+
+    data.sort(key=lambda x: x.deadline)
+
+
+    return render(request, 'projects/deadlines.html', {'project_name' : project_name, 'data_proj' : project, 'list_data':data})
 
 def manage_deadlines(request):
     project_name = request.GET.get('project_name')
@@ -97,3 +122,27 @@ def delete_project(request):
     to_delete = request.GET.get('project_name')
     Project_list.objects.get(name=to_delete).delete()
     return redirect('/projects')
+
+def delete_deadline(request):
+    to_delete = request.GET.get('deadline_name')
+    project = request.GET.get('project_name')
+    jsonDec = json.decoder.JSONDecoder()
+    return redirect('/projects/manage_deadlines?project_name=' + project)
+
+    data = Project_list.objects.get(name=project)
+
+    deadline = jsonDec.decode(data.deadlines)
+    deadline_name = jsonDec.decode(data.deadlines_name)
+    deadline_text = jsonDec.decode(data.deadlines_text)
+
+
+    index = deadline_name.index(to_delete)
+
+
+
+    data.deadlines = json.dumps(deadline.pop(index))
+    data.deadlines_text = json.dumps(deadline_text.pop(index))
+    data.deadlines_name = json.dumps(deadline_name.pop(index))
+    data.save()
+
+    return redirect('/projects/manage_deadlines?project_name='+ project)
