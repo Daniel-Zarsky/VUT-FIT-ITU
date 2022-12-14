@@ -66,7 +66,8 @@
           </div>
         </div>
         <div class="u-form u-form-1">
-          <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-horizontal u-form-spacing-15 u-inner-form" style="padding: 15px;" source="email">
+          <form action="invite?team={{team_name}}" method="post" class="u-clearfix u-form-horizontal u-form-spacing-15 u-inner-form" style="padding: 15px;">
+              {% csrf_token %}
             <div class="u-form-group u-form-name u-label-none">
               <label for="name-ef64" class="u-label">Name</label>
               <input type="text" placeholder="Name" id="name-ef64" name="name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle" required="">
@@ -75,44 +76,33 @@
               <input type="submit" value="submit" class="u-btn u-btn-submit u-button-style">
               <a href="/teams" class="u-btn u-btn-submit u-button-style">Done</a>
             </div>
+              {% for message in messages %}
+                <p id="messages">{{message}}</p>
+              {% endfor%}
           </form>
         </div>
+        {% for user in data %}
         <div class="u-align-left u-border-3 u-border-grey-40 u-container-style u-group u-group-2">
           <div class="u-container-layout u-container-layout-2">
             <img class="u-image u-image-circle u-preserve-proportions u-image-1" src="{% static 'teams/images/3f0b5310fb7c82a76de1b3e482a3a273315fbbebbdf4f2d0bfbb8a16ba16b03a4a19627c3bcc2f4f17126f1c6869e849d06c7bfc98367c5a0b0472_1280.png' %}" alt="" data-image-width="1280" data-image-height="1280">
-            <p class="u-text u-text-default u-text-2">Name je neviem</p>
-            <p class="u-text u-text-default u-text-3">Status<br>
+            <p class="u-text u-text-default u-text-2">{{user}}</p>
+            <p class="u-text u-text-default u-text-3">Member<br>
             </p>
           </div>
         </div>
+        {% endfor %}
+        {% for user in data_inv %}
+        <div class="u-align-left u-border-3 u-border-grey-40 u-container-style u-group u-group-2">
+          <div class="u-container-layout u-container-layout-2">
+            <img class="u-image u-image-circle u-preserve-proportions u-image-1" src="{% static 'teams/images/3f0b5310fb7c82a76de1b3e482a3a273315fbbebbdf4f2d0bfbb8a16ba16b03a4a19627c3bcc2f4f17126f1c6869e849d06c7bfc98367c5a0b0472_1280.png' %}" alt="" data-image-width="1280" data-image-height="1280">
+            <p class="u-text u-text-default u-text-2">{{user}}</p>
+            <p class="u-text u-text-default u-text-3">Invited<br>
+            </p>
+          </div>
+        </div>
+        {% endfor %}
       </div>
     </section>
-    <section class="u-clearfix u-section-2" id="sec-b290">
-      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1"></div>
-    </section>
-    <section class="u-align-center u-clearfix u-section-3" id="sec-51c5">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <h2 class="u-text u-text-default u-text-1">subscribe</h2>
-      </div>
-    </section>
-    <section class="u-clearfix u-section-4" id="sec-ead4">
-      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1"></div>
-    </section>
-    
-    
-    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-29ff"><div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-small-text u-text u-text-variant u-text-1">Sample text. Click to select the Text Element.</p>
-      </div></footer>
-    <section class="u-backlink u-clearfix u-grey-80">
-      <a class="u-link" href="https://nicepage.com/html-templates" target="_blank">
-        <span>HTML Website Templates</span>
-      </a>
-      <p class="u-text">
-        <span>created with</span>
-      </p>
-      <a class="u-link" href="https://nicepage.app" target="_blank">
-        <span>Website Builder</span>
-      </a>. 
-    </section>
+
   
 </body></html>
