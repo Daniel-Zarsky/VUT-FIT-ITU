@@ -24,3 +24,5 @@ def log_out(request):
     return redirect("/home")
 
 # Create your views here.
+def tbd(request):
+    return render(request, 'user_home/tbd.html')
