@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Task(models.Model):
     user= models.CharField(max_length=100)
-    team= models.CharField(max_length=200)
+    project= models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     done = models.BooleanField(default=False)

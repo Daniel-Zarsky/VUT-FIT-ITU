@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 .u-hidden-block {
   visibility: hidden!important;
@@ -83,6 +84,8 @@ sup {
   position: relative;
   vertical-align: baseline;
 }
+
+
 sub {
   bottom: -0.25em;
 }
@@ -16862,7 +16865,7 @@ section.u-opacity,
 }
 .u-hover-box .u-opacity.u-container-layout,
 .u-opacity.u-container-style {
-  background-color: transparent !important;
+  background-color: blue !important;
 }
 .u-effect-fade:hover .u-container-layout.u-over-slide.u-opacity {
   opacity: 1;

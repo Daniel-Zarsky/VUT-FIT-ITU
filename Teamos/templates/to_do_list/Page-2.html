@@ -28,8 +28,8 @@
     <link rel="canonical" href="/">
   </head>
   <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-1255"><div class="u-clearfix u-sheet u-sheet-1">
-        <a href="https://nicepage.com" class="u-image u-logo u-image-1">
-          <img src="{% static 'to_do_list/images/default-logo.png' %}" class="u-logo-image u-logo-image-1">
+         <a href="{% url 'home' %}">
+          <img src="{% static 'to_do_list/images/default-logo.png'%}" >
         </a>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
@@ -53,7 +53,7 @@
       </div></header>
     <section class="u-clearfix u-section-1" id="sec-4bb9">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-form u-form-1"> </a>
+        <div class="u-form u-form-1">
 
           <form action="addTask" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" name="form" style="padding: 10px;">
                {% csrf_token %}
@@ -66,8 +66,8 @@
               <textarea placeholder="Enter task description" rows="4" cols="50" id="message-af1b" name="task_description" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required=""></textarea>
             </div>
             <div class="u-form-group u-form-group-3">
-              <label for="text-7301" class="u-label">Team</label>
-              <input type="text" placeholder="" id="text-7301" name="team_name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+              <label for="text-7301" class="u-label">Project</label>
+              <input type="text" placeholder="" id="text-7301" name="project_name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
             </div>
             <div class="u-form-group u-form-group-4">
               <label for="text-6fa7" class="u-label">User</label>
@@ -75,7 +75,7 @@
             </div>
             <div class="u-form-date u-form-group u-form-group-5">
               <label for="date-c794" class="u-label">Date</label>
-              <input type="date" placeholder="MM/DD/YYYY" id="date-c794" name="date" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+              <input type="datetime-local" placeholder="MM/DD/YYYY" id="date-c794" name="date" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" >
             </div>
               <div class="u-form-date u-form-group u-form-group-6">
               <label for="date-c774" class="u-label">Priority</label>
@@ -86,10 +86,14 @@
               <input type="submit" value="submit" class="u-btn u-btn-submit u-button-style">
             </div>
             <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
+
+               <div class="u-align-right u-form-group u-form-submit">
+                <a href="{% url 'tasklist' %}" class="u-btn u-btn-submit u-button-style">Back</a>
+                  </div>
           </form>
         </div>
-        <a href="{% url 'tasklist' %}" class="u-btn u-button-style u-btn-2" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Back</a>
-       <!-- <a href="{% url 'save_task' %}" class="u-btn u-button-style u-btn-3" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Save</a> -->
+
+               <!-- <a href="{% url 'save_task' %}" class="u-btn u-button-style u-btn-3" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Save</a> -->
       </div>
     </section>
     
