@@ -19,7 +19,6 @@ from .form import Create_form
 
 @login_required(login_url='login')
 def list(request):
-    #data = Teams_list.objects.all()
     data = Teams_list.objects.filter(owner=request.user.username)
     return render(request, 'teams/list.html', {'data': data})
 
@@ -76,10 +75,6 @@ def invite_people(request):
 
     return render(request, 'teams/invite.html', {'team_name': team_name, 'data' : members, 'data_inv': members_inv})
 
-def show_dash(request):
-    team_name = request.GET.get('team_name')
-
-    return render(request, 'teams/invite.html')
     
 
 

@@ -68,7 +68,7 @@
         <p class="u-text u-text-default u-text-1">My Teams</p>
         <a href="create_new" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2">my invintations</a>
         {% for team in data %}
-        <img class="u-image u-image-circle u-preserve-proportions u-image-1 u-border-2 u-layout-row " src="{% static 'teams/images/default.jpg' %}" alt="" data-image-width="1280" data-image-height="1280" data-href="show_table?team_name={{team.name}}" rel="nofollow">
+        <img class="u-image u-image-circle u-preserve-proportions u-image-1 u-border-2 u-layout-row " src="{% static 'teams/images/default.jpg' %}" alt="" data-image-width="1280" data-image-height="1280" data-href="invite?team={{team.name}}" rel="nofollow">
         <p class="u-align-center u-text u-text-2">{{team.name}}</p>
         {% endfor %}
       </div>
