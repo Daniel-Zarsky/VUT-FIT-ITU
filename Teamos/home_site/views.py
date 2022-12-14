@@ -38,9 +38,4 @@ def login_request(request):
                   template_name = "home_site/login.html",
                   context={"form": form})
 
-# def user_home(request):
-#     return render(request=request,
-#                   template_name = "home_site/user_home.html",
-#                   contex=)
-
 
