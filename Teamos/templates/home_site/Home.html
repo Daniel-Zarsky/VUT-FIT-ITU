@@ -18,15 +18,15 @@
 		"@context": "http://schema.org",
 		"@type": "Organization",
 		"name": "",
-		"logo": "{% static 'home/images/default-logo.png' %}"
+		"logo": "{% static 'to_do_list/images/teamos_logo.png' %}"
 }</script>
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="Home">
     <meta property="og:type" content="website">
   </head>
   <body class="u-body u-overlap u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-b4e3"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <a href="https://nicepage.com" class="u-image u-logo u-image-1">
-          <img src="{% static 'home/images/default-logo.png' %}" class="u-logo-image u-logo-image-1">
+        <a href="{% url 'home' %}"  class="u-image u-logo u-image-1">
+          <img src="{% static 'to_do_list/images/teamos_logo.png' %}" class="u-logo-image u-logo-image-1">
         </a>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
@@ -37,20 +37,22 @@
             </a>
           </div>
           <div class="u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Home.html" style="padding: 10px 20px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="About.html" style="padding: 10px 20px;">About</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Contact.html" style="padding: 10px 20px;">Contact</a>
-</li><li class="u-nav u-unstyled u-nav-1"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'login' %}" style="padding: 10px 20px;">Login</a>
+             <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_todo' %}" style="padding: 10px 20px;">Tasks</a>
+
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'home' %}" style="padding: 10px 20px;">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_teams' %}" style="padding: 10px 20px;">Teams</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_projects' %}" style="padding: 10px 20px;">Projects</a>
 </li></ul>
           </div>
           <div class="u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="About.html">About</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Contact.html">Contact</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Page-1.html">Page 1</a>
+                  <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_todo' %}" style="padding: 10px 20px;">Tasks</a>
+
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'home' %}" style="padding: 10px 20px;">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_teams' %}" style="padding: 10px 20px;">Teams</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_projects' %}" style="padding: 10px 20px;">Projects</a>
 </li></ul>
               </div>
             </div>
@@ -72,9 +74,9 @@
                 
                 
               </span>
-                  <h2 class="u-text u-text-1">Sample Headline</h2>
-                  <p class="u-text u-text-2">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
-                  <a href="" class="u-active-none u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-hover-none u-none u-btn-1">learn more</a>
+                  <h2 class="u-text u-text-1">Teamos takes you further.</h2>
+                  <p class="u-text u-text-2">.</p>
+                  <a href="{% url 'login' %}" class="u-active-none u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-hover-none u-none u-btn-1">Join us right now!</a>
                 </div>
               </div>
               <div class="u-align-center u-container-style u-image u-layout-cell u-right-cell u-size-30 u-size-xs-60 u-image-1" src="" data-image-width="1080" data-image-height="1080">
@@ -92,16 +94,16 @@
             <div class="u-layout-row" style="">
               <div class="u-align-left u-container-style u-image u-layout-cell u-left-cell u-shading u-size-30 u-size-xs-60 u-image-1" src="" data-image-width="1080" data-image-height="1080">
                 <div class="u-container-layout u-valign-middle u-container-layout-1" src="">
-                  <h2 class="u-text u-text-default u-text-1">Sample Headline</h2>
-                  <p class="u-text u-text-2">Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc justo sagittis suscipit ultrices.</p>
-                  <a href="#" class="u-btn u-button-style u-palette-1-base u-btn-1">Button</a>
+                  <h2 class="u-text u-text-default u-text-1">Experience effective teamwork</h2>
+                  <p class="u-text u-text-2">Our app helps you manage tough team projects and thus enhance your career.</p>
+                  <a href="{% url 'login' %}" class="u-btn u-button-style u-palette-1-base u-btn-1">Are you ready to start your journey to success?</a>
                 </div>
               </div>
               <div class="u-align-left u-container-style u-grey-5 u-layout-cell u-right-cell u-size-30 u-size-xs-60 u-layout-cell-2">
                 <div class="u-container-layout u-valign-middle u-container-layout-2">
-                  <h2 class="u-text u-text-default u-text-3">Sample Headline</h2>
-                  <p class="u-text u-text-4">Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc justo sagittis suscipit ultrices.</p>
-                  <a href="#" class="u-btn u-button-style u-palette-1-base u-btn-2">Button</a>
+                  <h2 class="u-text u-text-default u-text-3">More than 4 satisfied users!</h2>
+                  <p class="u-text u-text-4">We appreciate your feedback so feel free to contact us with your opinion.</p>
+                  <a href="{% url 'login' %}" class="u-btn u-button-style u-palette-1-base u-btn-2">Start using Teamos now</a>
                 </div>
               </div>
             </div>
@@ -114,25 +116,23 @@
         <div class="u-clearfix u-expanded-width u-gutter-10 u-layout-wrap u-layout-wrap-1">
           <div class="u-layout">
             <div class="u-layout-row">
-              <div class="u-container-style u-image u-layout-cell u-left-cell u-size-15 u-size-30-md u-image-1" src="" data-image-width="1080" data-image-height="1080">
-                <div class="u-container-layout u-valign-middle u-container-layout-1"></div>
-              </div>
+              <img class="u-container-style u-image u-layout-cell u-left-cell u-size-15 u-size-30-md " src="{%static 'home/images/time.jpg'%}" data-image-width="1080" data-image-height="1080">
+
               <div class="u-align-left u-container-style u-layout-cell u-size-15 u-size-30-md u-layout-cell-2">
                 <div class="u-container-layout u-valign-middle u-container-layout-2">
-                  <h3 class="u-text u-text-1">Sample Headline</h3>
-                  <p class="u-text u-text-2">Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc justo sagittis suscipit ultrices.</p>
+                  <h3 class="u-text u-text-1">Deadlines and tasks </h3>
+                  <p class="u-text u-text-2">Deadlines and tasks help you to schedule you time and priorities.</p>
                 </div>
               </div>
-              <div class="u-container-style u-image u-layout-cell u-size-15 u-size-30-md u-image-2" src="" data-image-width="1080" data-image-height="1080">
-                <div class="u-container-layout u-valign-middle u-container-layout-3"></div>
-              </div>
-              <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-15 u-size-30-md u-layout-cell-4">
+              <img class="u-container-style u-image u-layout-cell u-size-15 u-size-30-md " src="{%static 'home/images/teamwork.png'%}" data-image-width="900" data-image-height="1080">
+
+
                 <div class="u-container-layout u-valign-middle u-container-layout-4">
-                  <h3 class="u-text u-text-3">Sample Headline</h3>
-                  <p class="u-text u-text-4">Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc justo sagittis suscipit ultrices.</p>
+                  <h3 class="u-text u-text-3">Projects and teams</h3>
+                  <p class="u-text u-text-4">Stay in touch with your colleagues through project and teams. Keep your company organised.</p>
                 </div>
-              </div>
-            </div>
+              </img>
+            </img>
           </div>
         </div>
       </div>

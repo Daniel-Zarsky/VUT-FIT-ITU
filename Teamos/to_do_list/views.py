@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Task
-from projects.models import Projet_list
+from projects.models import Project_list
 from user_home.models import User_acc
 from teams.models import Teams_list
 import simplejson as json
@@ -34,7 +34,7 @@ def addTask(request):
         if int(priority) > int(10) or int(priority) < int(0):
             return render(request, 'to_do_list/invalid_prio.html')
 
-        if not Projet_list.objects.filter(name=project).exists():
+        if not Project_list.objects.filter(name=project).exists():
             return render(request, 'to_do_list/invalid_project.html')
 
         if not User_acc.objects.filter(name=user).exists():
@@ -42,7 +42,7 @@ def addTask(request):
 
 
 
-        if Projet_list.objects.filter(name=project).first().team != User_acc.objects.filter(name=user).first().member:
+        if Project_list.objects.filter(name=project).first().team != User_acc.objects.filter(name=user).first().member:
               return render(request, 'to_do_list/user_project.html')
 
         else:
