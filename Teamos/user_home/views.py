@@ -19,3 +19,5 @@ def redirect_projects(request):
     return redirect("/projects")
 
 # Create your views here.
+def tbd(request):
+    return render(request, 'user_home/tbd.html')
