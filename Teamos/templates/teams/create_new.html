@@ -64,20 +64,15 @@
           <form action="create_new" method = "POST" class="u-clearfix u-form-spacing-25 u-form-vertical u-inner-form" style="padding: 30px;">
               {% csrf_token %}
               <h3 class="u-custom-font u-font-ubuntu u-form-group u-form-text u-text u-text-1"> Create Team</h3>
-            <img class="u-form-group u-form-image u-image u-image-1" src="{% static 'teams/images/gbeccc807cd340ce7a72f109e41b7e506ccdcbb11614ef2bbbf92b029a4a1e5d3f2a2e1d0a3168a922c4dc3d5a92f6e1198d33e5dc0180b513a51c15ab187ce22_1280.png' %}" data-image-width="1280" data-image-height="1280">
-            <input type="file" accept="image/*" name="image" class="u-form-group u-form-image u-image u-image-1">
             <div class="u-form-group u-form-name">
               <label for="name-66b3" class="u-label">Name</label>
-              <input type="text" placeholder="Enter your Name" id="name-66b3" name="name" class="u-grey-5 u-input u-input-rectangle u-radius-10" >
+              <input type="text" placeholder="Enter name of the team" id="name-66b3" name="name" class="u-grey-5 u-input u-input-rectangle u-radius-10" >
             </div>
-            <div class="u-align-left u-form-group u-form-submit">
-              <input type="Submit" value="submit" class="u-btn u-btn-round u-btn-submit u-button-style u-radius-10">
+            <div class=" u-form-group u-form-submit">
+              <input type="Submit" value="Create" class="u-btn u-btn-round u-btn-submit u-button-style u-radius-10">
+              <a class="u-btn u-btn-round u-btn-submit u-button-style u-radius-10">Back</a>
             </div>
           </form>
-            <div class="u-align-right u-form-group u-form-submit">
-              <a class="u-btn u-btn-round u-btn-submit u-button-style u-radius-10">Create</a>
-              <input type="submit" value="submit" data-href="invite" class="u-form-control-hidden">
-            </div>
         </div>
       </div>
     </section>
