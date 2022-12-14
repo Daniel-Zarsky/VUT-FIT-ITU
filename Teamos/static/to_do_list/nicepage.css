@@ -17306,7 +17306,6 @@ img.u-opacity-0,
   outline-width: 0;
   background-color: transparent;
   margin: 0;
-  -webkit-text-decoration-skip: objects;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   white-space: nowrap;
@@ -17473,7 +17472,7 @@ blockquote .small:before {
   border-right-width: 0 !important;
 }
 .u-pagination.u-spacing-0 .u-nav-item.active + .u-nav-item .u-nav-link {
-  border-left-width: 0 !important;
+  border-left-width: !important;
 }
 @media (max-width: 767px) {
   .u-pagination .u-pagination-item {

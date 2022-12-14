@@ -28,19 +28,26 @@ def addTask(request):
         project = request.POST['project_name']
         deadline = request.POST['date']
         priority = request.POST['priority']
+        if not user and not project:
+            return render(request, 'to_do_list/none.html')
+
+        if int(priority) > int(10) or int(priority) < int(0):
+            return render(request, 'to_do_list/invalid_prio.html')
+
         if not Projet_list.objects.filter(name=project).exists():
             return render(request, 'to_do_list/invalid_project.html')
 
         if not User_acc.objects.filter(name=user).exists():
             return render(request, 'to_do_list/invalid_user.html')
 
-        else:
-              if Projet_list.objects.filter(name=project).first().team != User_acc.objects.filter(name=user).first().member:
-                  return render(request, 'to_do_list/user_project.html')
 
-              else:
-                 task = Task(name=name, description=description, user=user, project=project, deadline=deadline, priority=priority)
-                 task.save()
+
+        if Projet_list.objects.filter(name=project).first().team != User_acc.objects.filter(name=user).first().member:
+              return render(request, 'to_do_list/user_project.html')
+
+        else:
+         task = Task(name=name, description=description, user=user, project=project, deadline=deadline, priority=priority)
+         task.save()
 
         return tasklist(request)
 
@@ -89,13 +96,10 @@ def view_projects(request):
     return render(request, 'projects/list.html')
 
 def process_completed(request):
-         name = request.GET.get('task_name')
-         data = Task.objects.filter(name=name)
-         print("input")
-         print(data)
+         task_name = request.GET.get('task_name')
+         data = Task.objects.filter(name=task_name)
          data.update(done=True, priority=0)
-         print("updated")
-         print(data)
+
          return tasklist(request)
 
 

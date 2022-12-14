@@ -12,6 +12,7 @@ class Task(models.Model):
 
     def _str_(self):
          return self.title
+
     class Meta:
          ordering = ['priority']
 
