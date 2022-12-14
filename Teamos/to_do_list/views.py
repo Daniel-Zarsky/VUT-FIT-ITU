@@ -20,11 +20,11 @@ def addTask(request):
         name = request.POST['task_name']
         description = ['team_name']
         user = request.POST['user_name']
-        team = request.POST['team_name']
+        project = request.POST['project_name']
         deadline = request.POST['date']
         priority = request.POST['priority']
 
-        task = Task(name=name, description=description, user=user, team=team, deadline=deadline, priority=priority)
+        task = Task(name=name, description=description, user=user, project=project, deadline=deadline, priority=priority)
         task.save()
         return tasklist(request)
 
@@ -69,8 +69,8 @@ def view_teams(request):
     return render(request, 'teams/list.html')
 
 
-def view_projects(request): #todo
-    return render(request, 'home_site/About.html')
+def view_projects(request):
+    return render(request, 'projects/list.html')
 
 def process_completed(request):
          name = request.GET.get('task_name')

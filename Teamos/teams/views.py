@@ -31,7 +31,7 @@ def create_new(request):
         teams_list.owner = request.user.username
         teams_list.members = json.dumps([request.user.username])
         teams_list.save()
-        re2urn redirect('{}?{}'.format(reverse('invite'), urlencode({'team':teams_list.name})))
+        return redirect('{}?{}'.format(reverse('invite'), urlencode({'team':teams_list.name})))
     else:
         return render(request, 'teams/create_new.html')
 
