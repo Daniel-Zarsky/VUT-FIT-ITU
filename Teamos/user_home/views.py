@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
+from django.contrib.auth import logout
 
 
 
@@ -17,5 +18,9 @@ def redirect_todo(request):
 
 def redirect_projects(request):
     return redirect("/projects")
+
+def log_out(request):
+    logout(request)
+    return redirect("/home")
 
 # Create your views here.
