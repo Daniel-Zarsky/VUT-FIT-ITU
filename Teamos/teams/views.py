@@ -78,7 +78,7 @@ def invite_people(request):
 
 def show_dash(request):
     team_name = request.GET.get('team_name')
-    print(team_name)
+
     return render(request, 'teams/invite.html')
     
 

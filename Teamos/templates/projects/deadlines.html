@@ -72,21 +72,31 @@
       </div></header>
 <!-- partial:index.partial.html -->
 <section id=timeline>
-	<h1>A Flexbox Timeline</h1>
-	<p class="leader">All cards must be the same height and width for space calculations on large screens.</p>
+	<h1>Project timeline for project {{project_name}}</h1>
 	<div class="demo-card-wrapper">
 		<div class="demo-card demo-card--step1">
 			<div class="head">
 				<div class="number-box">
 					<span>01</span>
 				</div>
-				<h2><span class="small">Subtitle</span> Technology</h2>
+				<h2><span class="small">The Beginning?</span>{{data_proj.start_of_project}} </h2>
+			</div>
+			<div class="body">
+				<p>Start of your project, it will be fun</p>
+			</div>
+		</div>
+
+		<div class="demo-card demo-card--step2">
+			<div class="head">
+				<div class="number-box">
+					<span>02</span>
+				</div>
+				<h2><span class="small">Subtitle</span> Confidence</h2>
 			</div>
 			<div class="body">
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta reiciendis deserunt doloribus consequatur, laudantium odio dolorum laboriosam.</p>
 			</div>
 		</div>
-
 		<div class="demo-card demo-card--step2">
 			<div class="head">
 				<div class="number-box">
@@ -128,16 +138,14 @@
 				<div class="number-box">
 					<span>05</span>
 				</div>
-				<h2><span class="small">Subtitle</span> Conversion</h2>
+				<h2><span class="small">The End... Again...</span> {{data_proj.final_deadline}}</h2>
 			</div>
 			<div class="body">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta reiciendis deserunt doloribus consequatur, laudantium odio dolorum laboriosam.</p>
+				<p>You can sleep now</p>
 			</div>
 		</div>
 	</div>
-	<a href="manage_deadlines?project={{project_name}}" class="u-btn u-btn-submit u-button-style center">Create new deadline</a>
+	<a href="manage_deadlines?project={{project_name}}" class="u-btn u-btn-submit u-button-style center">Manage project</a>
 </section>
-<!-- partial -->
-  
 </body>
 </html>

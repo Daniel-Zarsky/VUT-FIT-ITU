@@ -51,7 +51,7 @@ def show_timeline(request):
     project_name = request.GET.get('project_name')
     project = Project_list.objects.get(name=project_name)
 
-    return render(request, 'projects/deadlines.html', {'project_name' : project_name})
+    return render(request, 'projects/deadlines.html', {'project_name' : project_name, 'data_proj' : project})
 
 def manage_deadlines(request):
     return 
