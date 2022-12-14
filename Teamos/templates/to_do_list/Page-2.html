@@ -8,8 +8,8 @@
     {% load static %}
     <link rel="stylesheet"  href="{% static 'to_do_list/nicepage.css' %}" media="screen">
 <link rel="stylesheet"href="{% static 'to_do_list/Page-2.css' %}" media="screen">
-    <script class="u-script" type="text/javascript" src="{% static 'to_do_list/jquery-1.9.1.min.js' %}" defer=""></script>
-    <script class="u-script" type="text/javascript" src="{% static 'to_do_list/nicepage.js' %}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{% static 'to_do_list/jquery-1.9.1.min.jss' %}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{% static 'to_do_list/nicepage.jss' %}" defer=""></script>
     <meta name="generator" content="Nicepage 5.1.5, nicepage.com">
     <meta name="referrer" content="origin">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -40,35 +40,22 @@
             </a>
           </div>
           <div class="u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Page-1.html" style="padding: 10px 20px;">Page 1</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Page-2.html" style="padding: 10px 20px;">Page 2</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Home.html" style="padding: 10px 20px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="About.html" style="padding: 10px 20px;">About</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Contact.html" style="padding: 10px 20px;">Contact</a>
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'tasklist' %}" style="padding: 10px 20px;">Tasks</a>
+
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'home' %}" style="padding: 10px 20px;">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'view_teams' %}" style="padding: 10px 20px;">Teams</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'view_projects' %}" style="padding: 10px 20px;">Projects</a>
 </li></ul>
           </div>
-          <div class="u-nav-container-collapse">
-            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-              <div class="u-inner-container-layout u-sidenav-overflow">
-                <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Page-1.html">Page 1</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Page-2.html">Page 2</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="About.html">About</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Contact.html">Contact</a>
-</li></ul>
-              </div>
-            </div>
-            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
-          </div>
+
         </nav>
 
       </div></header>
     <section class="u-clearfix u-section-1" id="sec-4bb9">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-form u-form-1">
+        <div class="u-form u-form-1"> </a>
 
-          <form action="" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" name="form" style="padding: 10px;">
+          <form action="addTask" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" name="form" style="padding: 10px;">
                {% csrf_token %}
             <div class="u-form-group u-form-name">
               <label for="name-af1b" class="u-label">Task</label>
@@ -96,17 +83,13 @@
               </div>
 
             <div class="u-align-left u-form-group u-form-submit">
-              <a href="{% url 'submit_task' %}" class="u-btn u-btn-submit u-button-style">Submit</a>
-              <input type="submit" value="submit" class="u-form-control-hidden">
+              <input type="submit" value="submit" class="u-btn u-btn-submit u-button-style">
             </div>
             <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
-
-            <input type="hidden" value="" name="recaptchaResponse">
-            <input type="hidden" name="formServices" value="3f760d8d42330635c056e21f41d6aa65">
           </form>
         </div>
-        <a href="{% url 'delete_task' %}" class="u-btn u-button-style u-btn-2" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Delete</a>
-        <a href="{% url 'save_task' %}" class="u-btn u-button-style u-btn-3" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Save</a>
+        <a href="{% url 'tasklist' %}" class="u-btn u-button-style u-btn-2" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Back</a>
+       <!-- <a href="{% url 'save_task' %}" class="u-btn u-button-style u-btn-3" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Save</a> -->
       </div>
     </section>
     
