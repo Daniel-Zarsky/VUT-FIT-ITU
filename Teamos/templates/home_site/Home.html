@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="en"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
+    <meta charset="ut8f-">
     <meta name="keywords" content="">
     <meta name="description" content="">
     <title>Home</title>
@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{% static 'home/Home.css' %}" media="screen">
     <script class="u-script" type="text/javascript" src="{% static 'home/jquery-1.9.1.min.js' %}" defer=""></script>
     <script class="u-script" type="text/javascript" src="{% static 'home/nicepage.js' %}" defer=""></script>
-    <meta name="generator" content="Nicepage 5.0.20, nicepage.com">
+
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
 
     
@@ -37,9 +37,10 @@
             </a>
           </div>
           <div class="u-nav-container">
-             <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_todo' %}" style="padding: 10px 20px;">Tasks</a>
+             <ul class="u-nav u-unstyled u-nav-1">
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"  href="{% url 'login' %}" style="padding: 10px 20px;">Login</a>
+                 <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_todo' %}" style="padding: 10px 20px;">Tasks</a>
 
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'home' %}" style="padding: 10px 20px;">Home</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_teams' %}" style="padding: 10px 20px;">Teams</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_projects' %}" style="padding: 10px 20px;">Projects</a>
 </li></ul>
@@ -48,9 +49,11 @@
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                  <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_todo' %}" style="padding: 10px 20px;">Tasks</a>
+                  <ul class="u-nav u-unstyled u-nav-1">
 
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'home' %}" style="padding: 10px 20px;">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"  href="{% url 'login' %}" style="padding: 10px 20px;">Login</a>
+                      <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_todo' %}" style="padding: 10px 20px;">Tasks</a>
+
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_teams' %}" style="padding: 10px 20px;">Teams</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_projects' %}" style="padding: 10px 20px;">Projects</a>
 </li></ul>
@@ -76,13 +79,12 @@
               </span>
                   <h2 class="u-text u-text-1">Teamos takes you further.</h2>
                   <p class="u-text u-text-2">.</p>
-                  <a href="{% url 'login' %}" class="u-active-none u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-hover-none u-none u-btn-1">Join us right now!</a>
+                  <a href="{% url 'register' %}" class="u-active-none u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-hover-none u-none u-btn-1">Join us right now!</a>
                 </div>
               </div>
-              <div class="u-align-center u-container-style u-image u-layout-cell u-right-cell u-size-30 u-size-xs-60 u-image-1" src="" data-image-width="1080" data-image-height="1080">
-                <div class="u-container-layout u-valign-middle u-container-layout-2" src=""></div>
-              </div>
-            </div>
+              <img src="{%static 'home/images/first.jpg'%}" class=" u-container-style u-image u-right-cell u-size-30 u-size-xs-60 "  data-image-width="1080" data-image-height="1080">
+
+            </img>
           </div>
         </div>
       </div>
@@ -103,7 +105,7 @@
                 <div class="u-container-layout u-valign-middle u-container-layout-2">
                   <h2 class="u-text u-text-default u-text-3">More than 4 satisfied users!</h2>
                   <p class="u-text u-text-4">We appreciate your feedback so feel free to contact us with your opinion.</p>
-                  <a href="{% url 'login' %}" class="u-btn u-button-style u-palette-1-base u-btn-2">Start using Teamos now</a>
+                  <a href="{% url 'register' %}" class="u-btn u-button-style u-palette-1-base u-btn-2">Start using Teamos now</a>
                 </div>
               </div>
             </div>
@@ -116,7 +118,7 @@
         <div class="u-clearfix u-expanded-width u-gutter-10 u-layout-wrap u-layout-wrap-1">
           <div class="u-layout">
             <div class="u-layout-row">
-              <img class="u-container-style u-image u-layout-cell u-left-cell u-size-15 u-size-30-md " src="{%static 'home/images/time.jpg'%}" data-image-width="1080" data-image-height="1080">
+              <img class="u-container-style u-image  u-left-cell u-size-15 u-size-20-md " src="{%static 'home/images/time.jpg'%}" data-image-width="900" data-image-height="1080">
 
               <div class="u-align-left u-container-style u-layout-cell u-size-15 u-size-30-md u-layout-cell-2">
                 <div class="u-container-layout u-valign-middle u-container-layout-2">
@@ -124,7 +126,7 @@
                   <p class="u-text u-text-2">Deadlines and tasks help you to schedule you time and priorities.</p>
                 </div>
               </div>
-              <img class="u-container-style u-image u-layout-cell u-size-15 u-size-30-md " src="{%static 'home/images/teamwork.png'%}" data-image-width="900" data-image-height="1080">
+              <img class="u-container-style u-image u-size-15 u-size-30-md " src="{%static 'home/images/teamwork.png'%}" data-image-width="1080" data-image-height="1080">
 
 
                 <div class="u-container-layout u-valign-middle u-container-layout-4">
