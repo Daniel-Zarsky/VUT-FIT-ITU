@@ -8,3 +8,4 @@ class Projet_list(models.Model):
     final_deadline = models.DateField(default=timezone.now, null=True)
     deadlines = models.TextField(null=True)
     team = models.CharField(max_length=100, null=True)
+

@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class User_acc(models.Model):
     name = models.CharField(max_length=100)
     member = models.TextField(null=True)

@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Task
+from projects.models import Projet_list
+from user_home.models import User_acc
+from teams.models import Teams_list
+import simplejson as json
+from django.contrib import messages
 #from django.views.generic.list import ListView
 #from .forms import NameForm
 from django.http import HttpResponseRedirect
@@ -23,9 +28,20 @@ def addTask(request):
         project = request.POST['project_name']
         deadline = request.POST['date']
         priority = request.POST['priority']
+        if not Projet_list.objects.filter(name=project).exists():
+            return render(request, 'to_do_list/invalid_project.html')
 
-        task = Task(name=name, description=description, user=user, project=project, deadline=deadline, priority=priority)
-        task.save()
+        if not User_acc.objects.filter(name=user).exists():
+            return render(request, 'to_do_list/invalid_user.html')
+
+        else:
+              if Projet_list.objects.filter(name=project).first().team != User_acc.objects.filter(name=user).first().member:
+                  return render(request, 'to_do_list/user_project.html')
+
+              else:
+                 task = Task(name=name, description=description, user=user, project=project, deadline=deadline, priority=priority)
+                 task.save()
+
         return tasklist(request)
 
     return render(request, 'to_do_list/Page-2.html')
