@@ -6,6 +6,9 @@ from django.contrib import messages
 from . import views
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
+from .forms import CreateUserForm
+from django.forms import inlineformset_factory
+from user_home.models import User_acc
 
 # Create your views here.
 def index(request):
@@ -20,22 +23,29 @@ def logout_request(request):
 
 def login_request(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request=request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.info(request, f"You are now logged in as {username}")
-                return redirect("/user_home")
-            else:
-                messages.error(request, "Invalid username or password.")
-        else:
-            messages.error(request, "Invalid username or password.")
-    form = AuthenticationForm()
-    return render(request=request,
-                  template_name = "home_site/login.html",
-                  context={"form": form})
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('/user_home')
+
+    return render(request, 'home_site/login.html')
+def register(request):
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            messages.success(request, "Account was created for " + form.cleaned_data.get('username'))
+            new_user = User_acc()
+            form.save()
+            new_user.name = request.POST.get('username')
+            new_user.save()
+            return redirect('login')
+
+
+    return render(request, 'home_site/register.html', {'form' : form})
 
