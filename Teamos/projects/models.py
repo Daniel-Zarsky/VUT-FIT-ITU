@@ -12,3 +12,4 @@ class Project_list(models.Model):
     deadlines_text = models.TextField(null=True)
     team = models.CharField(max_length=100, null=True)
 
+
