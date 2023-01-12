@@ -1,3 +1,5 @@
+__author__ = "Samuel Simun - xsimun04@fit.vutbr.cz"
+
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User

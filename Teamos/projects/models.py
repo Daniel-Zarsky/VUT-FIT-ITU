@@ -1,3 +1,5 @@
+__author__ = "Samuel Simun - xsimun04@fit.vutbr.cz"
+
 from django.db import models
 import datetime
 from django.utils import timezone

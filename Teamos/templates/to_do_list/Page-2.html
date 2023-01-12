@@ -1,4 +1,5 @@
-v<!DOCTYPE html>
+<!DOCTYPE html>
+<!-- Daniel Zarsky xzarsk04@fit.vutbr.cz-->
 <html style="font-size: 16px;" lang="en"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
@@ -8,8 +9,6 @@ v<!DOCTYPE html>
     {% load static %}
     <link rel="stylesheet"  href="{% static 'to_do_list/nicepage.css' %}" media="screen">
 <link rel="stylesheet"href="{% static 'to_do_list/Page-2.css' %}" media="screen">
-    <script class="u-script" type="text/javascript" src="{% static 'to_do_list/jquery-1.9.1.min.jss' %}" defer=""></script>
-    <script class="u-script" type="text/javascript" src="{% static 'to_do_list/nicepage.jss' %}" defer=""></script>
     <meta name="generator" content="Nicepage 5.1.5, nicepage.com">
     <meta name="referrer" content="origin">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -58,7 +57,7 @@ v<!DOCTYPE html>
             </div>
             <div class="u-form-group u-form-message">
               <label for="message-af1b" class="u-label">Description</label>
-              <textarea placeholder="Enter task description" rows="4" cols="50" id="message-af1b" name="task_description" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required=""></textarea>
+              <textarea placeholder="Enter task description" rows="4" cols="50" id="message-af1b" name="task_description" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" ></textarea>
             </div>
             <div class="u-form-group u-form-group-3">
               <label for="text-7301" class="u-label">Project</label>
@@ -70,7 +69,7 @@ v<!DOCTYPE html>
             </div>
             <div class="u-form-date u-form-group u-form-group-5">
               <label for="date-c794" class="u-label">Date</label>
-              <input type="datetime-local" placeholder="MM/DD/YYYY" id="date-c794" name="date" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" >
+              <input type="datetime-local" placeholder="MM/DD/YYYY" id="date-c794" name="date" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" >
             </div>
               <div class="u-form-date u-form-group u-form-group-6">
               <label for="date-c774" class="u-label">Priority</label>

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Samuel Simun xsimun04@fit.vutbr.cz-->
 {% load static %}
 <html style="font-size: 16px;" lang="en"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,7 @@
     <meta name="description" content="">
     <title>Create team</title>
     <link rel="stylesheet" href="{% static 'teams/nicepage.css' %}" media="screen">
-<link rel="stylesheet" href="{% static 'teams/Page-3.css' %}" media="screen">
-    <script class="u-script" type="text/javascript" src="{% static 'teams/jquery.jss' %}" defer=""></script>
-    <script class="u-script" type="text/javascript" src="{% static 'teams/nicepage.jss' %}" defer=""></script>
-    <meta name="generator" content="Nicepage 5.1.5, nicepage.com">
+    <link rel="stylesheet" href="{% static 'teams/Page-3.css' %}" media="screen">
     <meta name="referrer" content="origin">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i">
@@ -61,7 +59,7 @@
     <section class="u-clearfix u-palette-1-base u-section-1" id="carousel_ac59">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-form u-radius-50 u-white u-form-1">
-          <form action="create_new" method = "POST" class="u-clearfix u-form-spacing-25 u-form-vertical u-inner-form" style="padding: 30px;">
+          <form id="create_new_form" action="" method="post" class="u-clearfix u-form-spacing-25 u-form-vertical u-inner-form" style="padding: 30px;">
               {% csrf_token %}
               <h3 class="u-custom-font u-font-ubuntu u-form-group u-form-text u-text u-text-1"> Create Team</h3>
             <div class="u-form-group u-form-name">
@@ -69,25 +67,51 @@
               <input type="text" placeholder="Enter name of the team" id="name-66b3" name="name" class="u-grey-5 u-input u-input-rectangle u-radius-10" >
             </div>
             <div class=" u-form-group u-form-submit">
-              <input type="Submit" value="Create" class="u-btn u-btn-round u-btn-submit u-button-style u-radius-10">
+              <input type="Submit" id="submit-button" value="Create" class="u-btn u-btn-round u-btn-submit u-button-style u-radius-10">
               <a class="u-btn u-btn-round u-btn-submit u-button-style u-radius-10">Back</a>
             </div>
           </form>
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+            <script>
+            console.log("Hello world")
+            $("#create_new_form").submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: '/teams/create_new',
+                    data :{
+                        name: $("#name-66b3").val(),
+                        csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
+                        action : "post"
+                    },
+                    success:function (json){
+                        document.getElementById("create_new_form").reset();
+                        var address = "/teams/invite?team="
+                        var team_name = json.instance
+                        var res = address.concat(team_name);
+                        $(location).attr('href', res);
+                    },
+                    error : function(xhr,errmsg,err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                            });
+                        })
+            </script>
         </div>
       </div>
     </section>
     
     
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-29ff"><div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-small-text u-text u-text-variant u-text-1">Sample text. Click to select the Text Element.</p>
+        <p class="u-small-text u-text u-text-variant u-text-1">Just enter your Team name ...</p>
       </div></footer>
     <section class="u-backlink u-clearfix u-grey-80">
       <p class="u-text">
-        <span>created with</span>
+        <span></span>
       </p>
       <a class="u-link" href="" target="_blank">
-        <span>Website Builder Software</span>
-      </a>. 
+        <span></span>
+      </a>
     </section>
-  
+
 </body></html>

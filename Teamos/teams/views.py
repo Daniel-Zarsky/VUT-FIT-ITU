@@ -1,3 +1,5 @@
+__author__ = "Samuel Simun - xsimun04@fit.vutbr.cz"
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -6,7 +8,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse, HttpRequest
 
 from .models import Teams_list
 from user_home.models import User_acc
@@ -24,14 +26,15 @@ def list(request):
 
 
 def create_new(request):
-    if request.method == 'POST':
+    if request.POST.get('action') == 'post':
         teams_list = Teams_list()
         teams_list.name = request.POST.get('name')
         teams_list.photo = request.FILES.get('image')
         teams_list.owner = request.user.username
         teams_list.members = json.dumps([request.user.username])
         teams_list.save()
-        return redirect('{}?{}'.format(reverse('invite'), urlencode({'team':teams_list.name})))
+        name = request.POST.get('name')
+        return JsonResponse({"instance": name}, status=200)
     else:
         return render(request, 'teams/create_new.html')
 

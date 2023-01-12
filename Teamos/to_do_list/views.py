@@ -1,3 +1,5 @@
+__author__ = "Daniel Zarsky - xzarsk04@fit.vutbr.cz"
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Task
@@ -39,11 +41,6 @@ def addTask(request):
 
         if not User_acc.objects.filter(name=user).exists():
             return render(request, 'to_do_list/invalid_user.html')
-
-
-
-        if Project_list.objects.filter(name=project).first().team != User_acc.objects.filter(name=user).first().member:
-              return render(request, 'to_do_list/user_project.html')
 
         else:
          task = Task(name=name, description=description, user=user, project=project, deadline=deadline, priority=priority)

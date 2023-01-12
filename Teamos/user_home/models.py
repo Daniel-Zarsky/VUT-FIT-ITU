@@ -1,3 +1,5 @@
+__author__ = "Samuel Simun - xsimun04@fit.vutbr.cz"
+
 from django.db import models
 
 class User_acc(models.Model):

@@ -1,3 +1,5 @@
+__author__ = "Samuel Simun - xsimun04@fit.vutbr.cz"
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
@@ -11,6 +13,7 @@ from datetime import datetime as dt
 from django.contrib import messages
 from django.utils.dateparse import parse_date, parse_datetime
 from itertools import zip_longest
+from django.http import JsonResponse
 
 
 def list_projects(request):
@@ -73,7 +76,7 @@ def show_timeline(request):
 
 
     for item in tasks:
-        data.append(time_line(item.deadline, item.description, item.name))
+        data.append(time_line(str(item.deadline)[:10], item.description, str(item.name)))
 
     data.sort(key=lambda x: x.deadline)
 

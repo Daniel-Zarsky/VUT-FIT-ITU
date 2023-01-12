@@ -1,4 +1,4 @@
-
+__author__ = "Daniel Zarsky - xzarsk04@fit.vutbr.cz"
 from django.contrib import admin
 from django.urls import path, include
 

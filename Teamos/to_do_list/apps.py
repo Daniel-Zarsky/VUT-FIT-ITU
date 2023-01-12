@@ -1,3 +1,5 @@
+__author__ = "Daniel Zarsky - xzarsk04@fit.vutbr.cz"
+
 from django.apps import AppConfig
 
 
