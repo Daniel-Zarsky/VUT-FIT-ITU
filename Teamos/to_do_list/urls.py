@@ -3,6 +3,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 from . import views #, List_of_tasks
+app_name ="to_do_list"
+
 
 urlpatterns = [
     path('', views.tasklist, name='tasklist'),
