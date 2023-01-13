@@ -5,12 +5,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from urllib.parse import urlencode
 from django.urls import reverse
-from django.views import View
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.http import JsonResponse, HttpRequest
-from django.shortcuts import render, HttpResponse
+from django.http import HttpResponse, JsonResponse, HttpRequest
 
 from .models import Teams_list
 from user_home.models import User_acc
@@ -19,18 +17,7 @@ import simplejson as json
 from .form import Create_form
 
 
-class TaskUpdateDeleteView(View):
-    def get(self, request, pk, *args, **kwargs):
-        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-            team = Teams_list.objects.get(name=pk)
-            team.invited = []
-            team.save()
-            return JsonResponse({"message":"success"})
-        return JsonResponse({"message" : "Wrong route"})
 
-class TaskUpdateAddView(View):
-    def get(self, request, pk, *args, **kwargs):
-        pass
 
 @login_required(login_url='login')
 def list(request):
@@ -47,7 +34,7 @@ def create_new(request):
         teams_list.members = json.dumps([request.user.username])
         teams_list.save()
         name = request.POST.get('name')
-        return JsonResponse({"message": name}, status=200)
+        return JsonResponse({"instance": name}, status=200)
     else:
         return render(request, 'teams/create_new.html')
 
@@ -55,10 +42,10 @@ def create_new(request):
 def invite_people(request):
     team_name = request.GET.get('team')
     jsonDec = json.decoder.JSONDecoder()
-    if request.POST.get('action') == 'post':
+    if request.method == 'POST':
         new = request.POST.get('name')
         if not User_acc.objects.filter(name = new).exists():
-            return JsonResponse({"instance" : "User doesn't exists"}, status=404)
+            messages.error(request, "User not found !")
 
         else:
             team_data = Teams_list.objects.get(name=team_name)
@@ -79,7 +66,7 @@ def invite_people(request):
                 invited = jsonDec.decode(team_data.invited)
                 team_data.invited = json.dumps(invited + [new])
             team_data.save()
-            return JsonResponse({"instance": new}, status=200)
+
 
 
     data = Teams_list.objects.get(name=team_name)
