@@ -9,10 +9,9 @@
     {% load static %}
     <link rel="stylesheet"  href="{% static 'to_do_list/nicepage.css' %}" media="screen">
 <link rel="stylesheet"href="{% static 'to_do_list/Page-2.css' %}" media="screen">
-    <meta name="generator" content="Nicepage 5.1.5, nicepage.com">
-    <meta name="referrer" content="origin">
+
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     
 
     <meta name="theme-color" content="#478ac9">
@@ -34,11 +33,11 @@
             </a>
           </div>
           <div class="u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'tasklist' %}" style="padding: 10px 20px;">Tasks</a>
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'to_do_list:tasklist' %}" style="padding: 10px 20px;">Tasks</a>
 
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'home' %}" style="padding: 10px 20px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'view_teams' %}" style="padding: 10px 20px;">Teams</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'view_projects' %}" style="padding: 10px 20px;">Projects</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'to_do_list:home' %}" style="padding: 10px 20px;">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'to_do_list:view_teams' %}" style="padding: 10px 20px;">Teams</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'to_do_list:view_projects' %}" style="padding: 10px 20px;">Projects</a>
 </li></ul>
           </div>
 
@@ -49,7 +48,8 @@
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-form u-form-1">
 
-          <form action="addTask" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" name="form" style="padding: 10px;">
+
+            <form id="create_new_task" action="" method="post" class="u-clearfix u-form-spacing-25 u-form-vertical u-inner-form" style="padding: 30px;">
                {% csrf_token %}
             <div class="u-form-group u-form-name">
               <label for="name-af1b" class="u-label">Task</label>
@@ -59,14 +59,16 @@
               <label for="message-af1b" class="u-label">Description</label>
               <textarea placeholder="Enter task description" rows="4" cols="50" id="message-af1b" name="task_description" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" ></textarea>
             </div>
-            <div class="u-form-group u-form-group-3">
-              <label for="text-7301" class="u-label">Project</label>
-              <input type="text" placeholder="Project regarding the task" id="text-7301" name="project_name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
-            </div>
-            <div class="u-form-group u-form-group-4">
-              <label for="text-6fa7" class="u-label">User</label>
-              <input type="text" placeholder="Enter who is in charge of this task" id="text-6fa7" name="user_name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
-            </div>
+
+            <div class="u-form-group u-form-name u-label-top u-form-group-2">
+              <label for="proj" class="">Project</label>
+                 <select name="project" id="proj" class="u-border-1 u-border-grey-30 u-input u-input-rectangle">
+                     {% for project in projects %}
+                   <option   value="{{project}}">{{project}}</option>
+                     {% endfor %}
+                 </select>
+              </div>
+
             <div class="u-form-date u-form-group u-form-group-5">
               <label for="date-c794" class="u-label">Date</label>
               <input type="datetime-local" placeholder="MM/DD/YYYY" id="date-c794" name="date" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" >
@@ -77,24 +79,52 @@
               </div>
 
             <div class="u-align-left u-form-group u-form-submit">
-              <input type="submit" value="submit" class="u-btn u-btn-submit u-button-style">
+              <input type="Submit" id="submit-button" value="submit" class="u-btn u-btn-submit u-button-style">
             </div>
-            <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
+
 
                <div class="u-align-right u-form-group u-form-submit">
-                <a href="{% url 'tasklist' %}" class="u-btn u-btn-submit u-button-style">Back</a>
+                <a href="{% url 'to_do_list:tasklist' %}" class="u-btn u-btn-submit u-button-style">Back</a>
                   </div>
           </form>
+
+            <script>
+            console.log("Hello from task formular")
+            $("#create_new_task").submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'to_do_list:addTask' %}",
+                    data :{
+                         task_name: $("#name-af1b").val(),
+                         task_description: $("#message-af1b").val(),
+                         project: $("#proj").val(),
+                         deadline: $("#date-c794").val(),
+                         priority: $("#date-c774").val(),
+
+                        csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
+                        action : "post"
+                    },
+                    success:function (json){
+                        document.getElementById("create_new_task").reset();
+                        var address = "/to_do_list/Page-1"
+                        var task_name = json.instance
+                        var res = address.concat(task_name);
+                        $(location).attr('href', res);
+                    },
+                    error : function(xhr,errmsg,err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                            });
+                        })
+            </script>
         </div>
 
-               <!-- <a href="{% url 'save_task' %}" class="u-btn u-button-style u-btn-3" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Save</a> -->
+
       </div>
     </section>
     
     
-    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-98e9"><div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-small-text u-text u-text-variant u-text-1">Sample text. Click to select the Text Element.</p>
-      </div></footer>
 
   
 </body></html>

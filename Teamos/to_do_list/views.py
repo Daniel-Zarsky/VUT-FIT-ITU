@@ -11,10 +11,11 @@ from django.contrib import messages
 #from django.views.generic.list import ListView
 #from .forms import NameForm
 from django.http import HttpResponseRedirect
+from django.http import JsonResponse
 
 @login_required(login_url='login')
 def tasklist(request):
-    data = Task.objects.filter(user=request.user.username, done=False)
+    data = Task.objects.filter(done=False)
     print(data)
     return render(request, 'to_do_list/Page-1.html', {'data': data})
 
@@ -23,32 +24,33 @@ def tasklist(request):
 #    context_object_name = 'tasks'
 
 def addTask(request):
-    if request.method == 'POST':
-        name = request.POST['task_name']
-        description = ['team_name']
-        user = request.POST['user_name']
-        project = request.POST['project_name']
-        deadline = request.POST['date']
-        priority = request.POST['priority']
-        if not user and not project:
-            return render(request, 'to_do_list/none.html')
+    if request.POST.get('action') == 'post':
+        print("tu")
+        name = request.POST.get('task_name')
+        description = request.POST.get('task_description')
+        project = request.POST.get('project')
+        deadline = request.POST.get('deadline')
+        priority = request.POST.get('priority')
 
-        if int(priority) > int(10) or int(priority) < int(0):
+        if int(priority) > 10 or int(priority) < 0:
             return render(request, 'to_do_list/invalid_prio.html')
 
-        if not Project_list.objects.filter(name=project).exists():
-            return render(request, 'to_do_list/invalid_project.html')
-
-        if not User_acc.objects.filter(name=user).exists():
-            return render(request, 'to_do_list/invalid_user.html')
-
         else:
-         task = Task(name=name, description=description, user=user, project=project, deadline=deadline, priority=priority)
-         task.save()
+             print("project = ", project)
+             task = Task(name=name, description=description, project=project, deadline=deadline, priority=priority)
+             task.save()
 
-        return tasklist(request)
+        return JsonResponse({"instance": name}, status=200)
 
-    return render(request, 'to_do_list/Page-2.html')
+    else:
+
+        match_2 = Project_list.objects.all()
+        match = []
+        for item in match_2:
+            if request.user.username in item.owner:
+                match = match + [item.name]
+
+        return render(request, 'to_do_list/Page-2.html', {'projects': match})
 
 # def delete_task(request):
 #     return render(request, 'to_do_list/Page-1.html')
