@@ -5,16 +5,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Task
 from projects.models import Project_list
 from django.views import View
-from user_home.models import User_acc
-from teams.models import Teams_list
-import simplejson as json
-from django.contrib import messages
-#from django.views.generic.list import ListView
-#from .forms import NameForm
-from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 
-
+#main view of all the tasks with asynchronous communication
 class TaskUpdateDone(View):
     def get(self, request, pk, *args, **kwargs):
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
@@ -25,13 +18,14 @@ class TaskUpdateDone(View):
         print("fail")
         return JsonResponse({"message": "Wrong route"}, status=404)
 
-
+# function for viewing the list of tasks synchronously
 @login_required(login_url='login')
 def tasklist(request):
     data = Task.objects.filter(done=False)
     print(data)
     return render(request, 'to_do_list/Page-1.html', {'data': data})
 
+#function to view a formular for creating tasks
 def addTask(request):
     if request.POST.get('action') == 'post':
         print("tu")
@@ -61,16 +55,13 @@ def addTask(request):
 
         return render(request, 'to_do_list/Page-2.html', {'projects': match})
 
-def save_task(request):
-    # save task to database but do not send others
-    return render(request, 'to_do_list/Page-1.html')
 
 def submit_task(request):
     # save task to database and send others
     return render(request, 'to_do_list/Page-1.html')
 
 def home(request):
-    return render(request, 'user_home/home.html')
+    return render(request, 'user_home/user_home.html')
 
 def view_teams(request):
     return render(request, 'teams/list.html')
