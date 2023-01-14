@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="{% static 'projects/Page-5.css' %}" media="screen">
     <script class="u-script" type="text/javascript" src="{% static 'projects/jquery.js' %}" defer=""></script>
     <script class="u-script" type="text/javascript" src="{% static 'projects/nicepage.js' %}" defer=""></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <meta name="generator" content="Nicepage 5.1.5, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
@@ -65,17 +67,216 @@
     <section class="u-align-center u-clearfix u-grey-10 u-section-1" id="sec-69a7">
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
         <a href="create_new" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">Create new project</a>
-        <div class="u-list u-list-1">
-          <div class="u-repeater u-repeater-1">
-            {% for project in data %}
-            <div class="u-align-left u-container-style u-list-item u-repeater-item u-white u-list-item-1">
-              <div class="u-container-layout u-similar-container u-container-layout-1" data-href="show_timeline?project_name={{project.name}}">
-                <h4  class="u-text u-text-default u-text-1">{{project.name}}</h4>
-              </div>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
+          <p></p>
+        <div class="container bootstrap snipets">
+           <div class="row flow-offset-1">
+           {% for project in data %}
+             <div class="col-xs-6 col-md-4">
+               <div class="product tumbnail thumbnail-3"><a href="show_timeline?project_name={{project.name}}"><img src="{% static 'projects/images/pexels-photo-3771045.png' %}" alt=""></a>
+                 <div class="caption">
+                   <h6><a href="show_timeline?project_name={{project.name}}" class="font_size_bigger">{{project.name}}</a></h6>
+                 </div>
+               </div>
+             </div>
+           {% endfor %}
+           </div>
+         </div>
       </div>
-    </section>
+</section>
+
+  <style type="text/css">
+    body{margin-top:20px;
+        background:#ddd;
+    }
+
+    .font_size_bigger{
+        font-size: 20px;
+    }
+
+    .product {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .product .caption {
+      margin-top: 15px;
+    }
+
+    .product .caption h6 {
+      color: #455a64;
+    }
+
+    .product .caption .price + .price {
+      margin-left: 15px;
+    }
+
+    .product.tumbnail {
+      box-shadow: 0 5px 25px 0 transparent;
+      transition: 0.3s linear;
+      padding-top: 0;
+    }
+
+    .product.tumbnail img:hover {
+      box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .single-product span {
+      display: inline-block;
+    }
+
+    .single-product .rating .fa-star, .single-product .rating .fa-star-o {
+      font-size: px;
+      color: #f7d4a0;
+      margin-left: 2px;
+    }
+
+    .single-product .rating + * {
+      margin-left: 15px;
+    }
+
+    .single-product h1.h1-variant-2 {
+      margin-bottom: 20px;
+    }
+
+    .single-product .caption:before {
+      content: '';
+      height: 100%;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .single-product .caption span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .single-product .caption .price {
+      font-weight: 400;
+    }
+
+    .single-product .caption .price.sale {
+      color: #e75854;
+      font-size: 33px;
+    }
+
+    .single-product .caption * + .price {
+      margin-left: 10.8%;
+    }
+
+    @media (max-width: 1199px) {
+      .single-product .caption * + .price {
+        margin-left: 7.8%;
+      }
+    }
+
+    .single-product .caption * + .quantity {
+      margin-left: 26px;
+    }
+
+    .single-product .caption .info-list {
+      border-bottom: 1px solid #f3f3ed;
+      border-top: 1px solid #f3f3ed;
+      font-family: Montserrat, sans-serif;
+      padding-top: 26px;
+      padding-bottom: 26px;
+      text-align: left;
+    }
+
+    .single-product .caption .info-list dt, .single-product .caption .info-list dd {
+      display: inline-block;
+      line-height: 25px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .single-product .caption .info-list dt {
+      letter-spacing: 0.08em;
+      font-size: 12px;
+      color: #a7b0b4;
+      width: 35%;
+      text-transform: uppercase;
+    }
+
+    .single-product .caption .info-list dd {
+      font-size: 15px;
+      color: #565452;
+      width: 62.5%;
+    }
+
+    .single-product .caption .share span.small {
+      margin-top: 9px;
+    }
+
+    @media (max-width: 991px) {
+      .single-product .caption .share span.small {
+        display: block;
+        margin-bottom: 15px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .single-product .table-mobile tr {
+        padding-top: 0;
+      }
+      .single-product .table-mobile tr:before {
+        display: none;
+      }
+    }
+
+    .price {
+      display: inline-block;
+      font-size: 15px;
+      font-family: Montserrat, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #2b2f3e;
+    }
+
+    .price.sale {
+      color: #e75854;
+    }
+
+    .price del {
+      color: #b0bec5;
+    }
+
+    .quantity {
+      text-align: center;
+      font-family: Montserrat, sans-serif;
+      font-size: 12px;
+      background: #eceff1;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      width: 82px;
+      height: auto;
+      display: inline-block;
+    }
+
+    .quantity span {
+      display: inline-block;
+    }
+
+    .quantity .num {
+      width: 26px;
+    }
+
+    .quantity [class*='fa-'] {
+      padding-top: 4px;
+      width: 22px;
+      padding-bottom: 4px;
+      color: #b0bec5;
+      cursor: pointer;
+    }
+
+    .quantity [class*='fa-']:hover {
+      color: #455a64;
+    }
+</style>
+
+<script type="text/javascript">
+
+</script>
+
 </body></html>

@@ -8,15 +8,15 @@
     <meta name="description" content="">
     <title>Invite user</title>
     <link rel="stylesheet" href="{% static 'teams/nicepage.css' %}" media="screen">
-    <link rel="stylesheet" href="{% static 'teams/Page-4.css' %}" media="screen">
+<link rel="stylesheet" href="{% static 'teams/Page-4.css' %}" media="screen">
     <meta name="generator" content="Nicepage 5.1.5, nicepage.com">
     <meta name="referrer" content="origin">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    
-    
-    
-    
-    
+
+
+
+
+
     <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Organization",
@@ -29,7 +29,7 @@
   </head>
   <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-b4e3"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="{% url 'home' %}"  class="u-image u-logo u-image-1">
-          <img src="{% static 'teams/images/default-logo.png' %}" class="u-logo-image u-logo-image-1">
+          <img src="{% static 'teams/images/teamos_logo.png' %}" class="u-logo-image u-logo-image-1">
         </a>
         <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="u-form u-form-1">
-          <form action="invite?team={{team_name}}" method="post" class="u-clearfix u-form-horizontal u-form-spacing-15 u-inner-form" style="padding: 15px;">
+          <form action="" id="form" method="post" class="u-clearfix u-form-horizontal u-form-spacing-15 u-inner-form" style="padding: 15px;">
               {% csrf_token %}
             <div class="u-form-group u-form-name u-label-none">
               <label for="name-ef64" class="u-label">Name</label>
@@ -87,21 +87,109 @@
           <div class="u-container-layout u-container-layout-2">
             <img class="u-image u-image-circle u-preserve-proportions u-image-1" src="{% static 'teams/images/3f0b5310fb7c82a76de1b3e482a3a273315fbbebbdf4f2d0bfbb8a16ba16b03a4a19627c3bcc2f4f17126f1c6869e849d06c7bfc98367c5a0b0472_1280.png' %}" alt="" data-image-width="1280" data-image-height="1280">
             <p class="u-text u-text-default u-text-2">{{user}}</p>
-            <p class="u-text u-text-default u-text-3">Member<br>
-            </p>
+            <p class="u-text u-text-default u-text-3">Member<br></p>
           </div>
         </div>
         {% endfor %}
+        <div class="users">
         {% for user in data_inv %}
-        <div class="u-align-left u-border-3 u-border-grey-40 u-container-style u-group u-group-2">
+        <div class=" record u-align-left u-border-3 u-border-grey-40 u-container-style u-group u-group-2">
           <div class="u-container-layout u-container-layout-2">
             <img class="u-image u-image-circle u-preserve-proportions u-image-1" src="{% static 'teams/images/3f0b5310fb7c82a76de1b3e482a3a273315fbbebbdf4f2d0bfbb8a16ba16b03a4a19627c3bcc2f4f17126f1c6869e849d06c7bfc98367c5a0b0472_1280.png' %}" alt="" data-image-width="1280" data-image-height="1280">
             <p class="u-text u-text-default u-text-2">{{user}}</p>
             <p class="u-text u-text-default u-text-3">Invited<br>
+            <a id="button-{{user}}" href="{% url 'teams:delete' team_name %}" class="link-delete u-btn u-button-style ">Remove</a>
             </p>
           </div>
         </div>
         {% endfor %}
+
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            $("#form").submit(function(e){
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: '/teams/invite?team={{team_name}}',
+                    data :{
+                        name: $("#name-ef64").val(),
+                        csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
+                        action : "post"
+                    },
+                    success:function (resp){
+                        document.getElementById("form").reset();
+                        console.log(resp.instance)
+                        $(".users").before("" +
+                            "<div class=\" record u-align-left u-border-3 u-border-grey-40 u-container-style u-group u-group-2\">\n" +
+                            "          <div class=\"u-container-layout u-container-layout-2\">\n" +
+                            "            <img class=\"u-image u-image-circle u-preserve-proportions u-image-1\" src=\"{% static 'teams/images/3f0b5310fb7c82a76de1b3e482a3a273315fbbebbdf4f2d0bfbb8a16ba16b03a4a19627c3bcc2f4f17126f1c6869e849d06c7bfc98367c5a0b0472_1280.png' %}\" alt=\"\" data-image-width=\"1280\" data-image-height=\"1280\">\n" +
+                            "            <p class=\"u-text u-text-default u-text-2\">" + resp.instance +"</p>\n" +
+                            "            <p class=\"u-text u-text-default u-text-3\">Invited<br>\n" +
+                            "            <a id=\"button-" + resp.instance + "\" href=\"{% url 'teams:delete' team_name %}\" class=\"link-delete u-btn u-button-style \">Remove</a>\n" +
+                            "            </p>\n" +
+                            "          </div>\n" +
+                            "        </div>").toggleClass("record");
+                        $(".link-delete").on("click", function(e){
+                        e.preventDefault();
+                        var $this = $(this);
+                        if (confirm("DO YOU REALY?")){
+                            $.ajax({
+                                url: $this.attr("href"),
+                                type: "GET",
+                                dataType: "json",
+                                success: function(resp) {
+                                    if (resp.message === 'success') {
+                                        $this.parents('.record').fadeOut("slow", function () {
+                                            $this.parents('.record').remove();
+                                        });
+                                    }
+                                    else {
+                                        alert(resp.message)
+                                    }
+                                },
+                                error: function(resp) {
+                                    console.log("Something went wrong");
+                                }
+                            })
+                        }
+                    })
+                    },
+                    error : function(xhr,errmsg,err) {
+                        window.alert("User doesn't exists");
+                    }
+                });
+            })
+        </script>
+        <script>
+
+      </script>
+        <script>
+            $(".link-delete").on("click", function(e){
+                e.preventDefault();
+                var $this = $(this);
+                if (confirm("DO YOU REALY?")){
+                    $.ajax({
+                        url: $this.attr("href"),
+                        type: "GET",
+                        dataType: "json",
+                        success: function(resp) {
+                            if (resp.message === 'success') {
+                                $this.parents('.record').fadeOut("slow", function () {
+                                    $this.parents('.record').remove();
+                                });
+                            }
+                            else {
+                                alert(resp.message)
+                            }
+                        },
+                        error: function(resp) {
+                            console.log("Something went wrong");
+                        }
+                    })
+                }
+            })
+        </script>
       </div>
     </section>
 
