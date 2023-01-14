@@ -107,16 +107,15 @@
                     },
                     success:function (json){
                         document.getElementById("create_new_task").reset();
-                        var address = "/to_do_list/Page-1"
-                        var task_name = json.instance
-                        var res = address.concat(task_name);
-                        $(location).attr('href', res);
+                        console.log("Back")
+                        $(location).attr( "href", "/to_do_list" );
                     },
                     error : function(xhr,errmsg,err) {
                         console.log(xhr.status + ": " + xhr.responseText);
                     }
                             });
                         })
+
             </script>
         </div>
 

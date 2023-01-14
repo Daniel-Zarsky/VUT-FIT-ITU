@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Task
 from projects.models import Project_list
+from django.views import View
 from user_home.models import User_acc
 from teams.models import Teams_list
 import simplejson as json
@@ -13,15 +14,23 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 
+
+class TaskUpdateDone(View):
+    def get(self, request, pk, *args, **kwargs):
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            task = Task.objects.get(name=pk)
+            task.delete()
+            return JsonResponse({"message": "success"}, status=200)
+
+        print("fail")
+        return JsonResponse({"message": "Wrong route"}, status=404)
+
+
 @login_required(login_url='login')
 def tasklist(request):
     data = Task.objects.filter(done=False)
     print(data)
     return render(request, 'to_do_list/Page-1.html', {'data': data})
-
-# class List_of_tasks(ListView):
-#    model = Task
-#    context_object_name = 'tasks'
 
 def addTask(request):
     if request.POST.get('action') == 'post':
@@ -52,9 +61,6 @@ def addTask(request):
 
         return render(request, 'to_do_list/Page-2.html', {'projects': match})
 
-# def delete_task(request):
-#     return render(request, 'to_do_list/Page-1.html')
-
 def save_task(request):
     # save task to database but do not send others
     return render(request, 'to_do_list/Page-1.html')
@@ -63,42 +69,15 @@ def submit_task(request):
     # save task to database and send others
     return render(request, 'to_do_list/Page-1.html')
 
-
-# def get_name(request):
-#     # if this is a POST request we need to process the form data
-#     if request.method == 'POST':
-#         # create a form instance and populate it with data from the request:
-#         form = NameForm(request.POST)
-#         # check whether it's valid:
-#         if form.is_valid():
-#             # process the data in form.cleaned_data as required
-#             # ...
-#             # redirect to a new URL:
-#             return HttpResponseRedirect('/thanks/')
-#
-#     # if a GET (or any other method) we'll create a blank form
-#     else:
-#         form = NameForm()
-#
-#     return render(request, 'name.html', {'form': form})
-
-
 def home(request):
     return render(request, 'user_home/home.html')
-
 
 def view_teams(request):
     return render(request, 'teams/list.html')
 
-
 def view_projects(request):
     return render(request, 'projects/list.html')
 
-def process_completed(request):
-         task_name = request.GET.get('task_name')
-         data = Task.objects.filter(name=task_name)
-         data.update(done=True, priority=0)
 
-         return tasklist(request)
 
 
