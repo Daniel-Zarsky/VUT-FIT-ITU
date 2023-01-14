@@ -6,6 +6,7 @@ from .models import Task
 from projects.models import Project_list
 from django.views import View
 from django.http import JsonResponse
+import json
 
 
 # main view of all the tasks with asynchronous communication
@@ -16,6 +17,7 @@ class TaskUpdateDone(View):
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             task = Task.objects.get(name=pk)
             task.done = True
+            task.save()
             return JsonResponse({"message": "success"}, status=200)
 
         return JsonResponse({"message": "Wrong route"}, status=404)
@@ -37,12 +39,14 @@ class TaskShowDone(View):
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
 
             all_tasks = Task.objects.all() #all tasks
+            print(all_tasks)
             name = [] #array for done tasks
             for t in all_tasks:
-                if t.done:                 #if task is done
-                    name = name + [t.name] #add it to the array
+               if t.done:                  #if task is done
+                    name = name + [t.name]  #add it to the array
 
-            return JsonResponse({'instance': name}, status=200)
+            name = json.dumps(name)
+            return JsonResponse({'name' : name}, status=200) #send the array
 
         return JsonResponse({"message": "Wrong route"}, status=404)
 

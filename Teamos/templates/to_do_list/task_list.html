@@ -59,7 +59,7 @@
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
           </div>
         </nav>
-        <a class="show_done" href="{% url 'to_do_list:show_done'%}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">SHOW DONE</a>
+        <a id="show_done" href="{% url 'to_do_list:show_done'%}" class="show-done u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2">SHOW DONE</a>
         <a href="{% url 'to_do_list:addTask' %}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">ADD NEW TASK</a>
       </div></header>
      {% for Task in data %}
@@ -157,9 +157,7 @@
                             if (json.message === "success"){
                                  alert("Task done!")
                                  $this.parents('.record').fadeOut('slow', function(){
-                                     $this.parents('.record').remove();
-
-
+                                     $this.parents('.record').hide();
                                  })
                             }
 
@@ -177,24 +175,15 @@
                     e.preventDefault();
                     var $this =$(this);
                     $.ajax({
-                        type: "POST",
+                        type: "GET",
                         url: $this.attr("href"),
                         dataType: "json",
-                        data :{
-                            name: $("#done-button").val(),
-                            csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
-                            action : "post"
-                    },
+
                         success:function (json){
-                            console.log("task done")
-                            if (json.message === "success"){
-                                 alert("Task done!")
-                                 $this.parents('.record').fadeOut('slow', function(){
-                                     $this.parents('.record').remove();
-
-
-                                 })
-                            }
+                            console.log("data recieved from django in jq")
+                            let name_list = json.name
+                            console.log(name_list.toString())
+                            alert(name_list.toString())
 
 
                         },
