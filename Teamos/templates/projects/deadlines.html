@@ -1,43 +1,19 @@
 <!DOCTYPE html>
-<!-- Samuel Simun xsimun04@fit.vutbr.cz-->
 {% load static %}
 
-<html style="font-size: 16px;" lang="en"><head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="keywords" content="Enter please name of the project">
-    <meta name="description" content="">
-    <title>Deadlines</title>
-    <style>
-	.center {
-  margin: 0;
-  position: absolute;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-</style>
-    <link rel="stylesheet" href="{% static 'projects/nicepage.css' %}" media="screen">
-    <link rel="stylesheet" href="{% static 'projects/Page-3.css' %}" media="screen">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <link rel="stylesheet" href="{% static 'projects/style.css' %}">
+    <title>Project Timeline</title>
     <script class="u-script" type="text/javascript" src="{% static 'projects/jquery.js' %}" defer=""></script>
     <script class="u-script" type="text/javascript" src="{% static 'projects/nicepage.js' %}" defer=""></script>
-    <meta name="generator" content="Nicepage 5.1.5, nicepage.com">
-    <meta name="referrer" content="origin">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-
-
-    <script type="application/ld+json">{
-		"@context": "http://schema.org",
-		"@type": "Organization",
-		"name": "WebSite3418080",
-		"logo": "images/default-logo.png"
-}</script>
-    <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Page 3">
-    <meta property="og:type" content="website">
-  </head>
+    <link rel="stylesheet" href="{% static 'projects/timeline.css' %}"/>
+    <link rel="stylesheet" href="{% static 'projects/nicepage.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'projects/Page-3.css' %}" media="screen">
+    <script src="{% static 'projects/timeline.js' %}" defer></script>
+</head>
 <body>
 <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-b4e3"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="/user_home"  class="u-image u-logo u-image-1">
@@ -70,50 +46,57 @@
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
           </div>
         </nav>
-      </div></header>
-<!-- partial:index.partial.html -->
-<section id=timeline>
-	<h1>Project timeline for project {{project_name}}</h1>
-	<div class="demo-card-wrapper">
-		<div class="demo-card demo-card--step1">
-			<div class="head">
-				<div class="number-box">
-					<span></span>
-				</div>
-				<h2><span class="small">The Beginning?</span>{{data_proj.start_of_project}} </h2>
-			</div>
-			<div class="body">
-				<p>Start of your project, it will be fun</p>
-			</div>
-		</div>
-		{% for data in list_data %}
-		<div class="demo-card demo-card--step2">
-			<div class="head">
-				<div class="number-box">
-					<span></span>
-				</div>
-				<h2><span class="small">{{data.deadline_name}}</span> {{data.deadline}}</h2>
-			</div>
-			<div class="body">
-				<p>{{data.deadline_text}}</p>
-			</div>
-		</div>
+</div>
+</header>
+</body>
+    <main>
+        <section class="timeline-section">
+            <uL>
+            <div class="u-align-right red_color">
+                    <a href="/projects/" class=" u-align-left u-btn u-btn-round u-radius-50 u-palette-2-dark-1 u-btn-submit u-button-style "> « Take me back</a>
+                </div>
+            <div class="u-align-center grey_bg">
+                <h1>Timeline for project {{project_name}}</h1>
+                <p></p>
+            </div>
+            <div class="u-align-center">
+                    <p></p>
+                    <a href="manage_deadlines?project_name={{project_name}}" class="u-align-center u-btn u-btn-submit u-button-style ">Manage project</a>
+                </div>
+                <li>
+                    <div>
+                        <!--Use the time tag-->
+                      <p> Nazov </p>
+                      <p></p>
+                      <time>{{data_proj.start_of_project}} </time>
+                      Lorem ipsum dolor sit amet consectetur adipisicing
+                      elit. Incidunt nostrum quidem eius repudiandae nam, nemo fuga
+                      architecto possimus id at rem beatae consequuntur dolor commodi.
+                    </div>
+                </li>
 
-		{% endfor %}
+                {% for data in list_data %}
 
-		<div class="demo-card demo-card--step3">
-			<div class="head">
-				<div class="number-box">
-					<span>05</span>
-				</div>
-				<h2><span class="small">The End... Again...</span> {{data_proj.final_deadline}}</h2>
-			</div>
-			<div class="body">
-				<p>You can sleep now</p>
-			</div>
-		</div>
-	</div>
-	<a href="manage_deadlines?project_name={{project_name}}" class="u-btn u-btn-submit u-button-style center">Manage project</a>
-</section>
+                <li>
+                  <div>
+                      <p>{{data.deadline_name}}</p>
+                    <time>{{data.deadline}}</time> {{data.deadline_text}}
+                  </div> 
+                </li>
+
+                {% endfor %}
+
+                <li>
+                    <div>
+                       <p> The final deadline </p>
+                      <time>{{data_proj.final_deadline}}</time> The End?
+                    </div>
+                </li>
+            </uL>
+
+        </section>
+    </main>
+    <script src="{% static 'projects/timeline.js' %}">
+    </script>
 </body>
 </html>

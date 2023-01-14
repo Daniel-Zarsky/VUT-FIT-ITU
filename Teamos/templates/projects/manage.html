@@ -12,21 +12,13 @@
     <meta name="generator" content="Nicepage 5.1.5, nicepage.com">
     <meta name="referrer" content="origin">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-
-
-    <script type="application/ld+json">{
-		"@context": "http://schema.org",
-		"@type": "Organization",
-		"name": "WebSite3418080",
-		"logo": "images/default-logo.png"
-}</script>
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="Page 2">
     <meta property="og:type" content="website">
   </head>
   <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-b4e3"><div class="u-clearfix u-sheet u-sheet-1">
         <a class="u-image u-logo u-image-1">
-          <img src="{% static 'projects/images/default-logo.png' %}" class="u-logo-image u-logo-image-1">
+          <img src="{% static 'to_do_list/images/teamos_logo.png' %}" class="u-logo-image u-logo-image-1">
         </a>
         <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
@@ -58,11 +50,16 @@
       </div></header>
     <section class="u-clearfix u-section-1" id="carousel_2fcb">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <h3 class="u-text u-text-default u-text-1">Project {{data.name}}</h3>
+          <h3 class="u-text u-text-default u-text-1">Project {{data.name}}</h3>
+                  <a href="show_timeline?project_name={{data.name}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1"> Back</a>
+
         <a href="delete_project?project_name={{data.name}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-2-dark-1 u-radius-50 u-btn-1">Delete project</a>
-        <h3 class="u-text u-text-default u-text-2">Manage deadlines</h3>
+
+          <p></p>
+          <hr>
+          <h3 class="u-text u-text-default u-text-2">Add deadlines</h3>
         <div class="u-form u-form-1">
-          <form action="manage_deadlines?project_name={{data.name}}" method="post" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" name="form" style="padding: 10px;">
+          <form action="" method="post" id="form" class=" create_new u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" name="form" style="padding: 10px;">
                 {% csrf_token %}
               <div class="u-form-group u-form-name">
               <label for="name-3764" class="u-label">Deadline</label>
@@ -83,18 +80,108 @@
             <input type="hidden" name="formServices" value="f24b4b66988b1e3b02ebfd15a8bf1352">
           </form>
         </div>
+        <hr>
+        <h3 class="u-text u-text-default u-text-2">Current deadlines</h3>
+        <div class="deadlines">
           {% for date,message,name in deadlines_data %}
-        <div class="u-container-style u-group u-palette-1-base u-radius-10 u-shape-round u-group-1">
-          <div class="u-container-layout u-container-layout-1"><a href="delete_deadline?project_name={{data.name}}&deadline_name={{name}}"> <span class="u-file-icon u-icon u-icon-1"><img src="{% static 'projects/images/1828665.png' %}" alt=""></span> </a>
+        <div class="record u-container-style u-group u-palette-1-base u-radius-10 u-shape-round u-group-1">
+          <div class="u-container-layout u-container-layout-1"><a href="delete_deadline?project_name={{data.name}}&deadline_name={{name}}" class="link-delete"> <span class=" u-file-icon u-icon u-icon-1"><img src="{% static 'projects/images/1828665.png' %}" class="" alt=""></span> </a>
             <h3 class="u-text u-text-default u-text-3">{{name}}</h3>
             <p class="u-align-center u-text u-text-4">{{date}}</p>
             <p class="u-align-center u-text u-text-5">{{message}}</p>
           </div>
         </div>
           {% endfor %}
+        </div>
       </div>
-         <a href="show_timeline?project_name={{data.name}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1"> Back</a>
+        <p></p>
     </section>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+            $("#form").submit(function(e){
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: 'manage_deadlines?project_name={{data.name}}',
+                    data :{
+                        deadline: $("#name-3764").val(),
+                        date: $("#email-3764").val(),
+                        message: $("#message-3764").val(),
+                        csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
+                        action : "post"
+                    },
+                    success:function (resp){
+                        document.getElementById("form").reset();
+                        console.log(resp.message)
+                        $(".deadlines").before("" +
+                            "<div class=\"record u-container-style u-group u-palette-1-base u-radius-10 u-shape-round u-group-1\">\n" +
+                            "          <div class=\"u-container-layout u-container-layout-1\"><a href=\"delete_deadline?project_name={{data.name}}&deadline_name=" + resp.deadline_name + "\" class=\"link-delete\"> <span class=\" u-file-icon u-icon u-icon-1\"><img src=\"{% static 'projects/images/1828665.png' %}\" class=\"\" alt=\"\"></span> </a>\n" +
+                            "            <h3 class=\"u-text u-text-default u-text-3\">" + resp.deadline_name + "</h3>\n" +
+                            "            <p class=\"u-align-center u-text u-text-4\">" + resp.deadline_date + "</p>\n" +
+                            "            <p class=\"u-align-center u-text u-text-5\">" + resp.deadline_text + "</p>\n" +
+                            "          </div>\n" +
+                            "        </div>")
+                        $(".link-delete").on("click", function(e){
+                        e.preventDefault();
+                        var $this = $(this);
+                        if (confirm("You are going to remove one of your targets. \nAre you sure?")){
+                            $.ajax({
+                                url: $this.attr("href"),
+                                type: "GET",
+                                dataType: "json",
+                                success: function(resp) {
+                                    if (resp.message === 'success') {
+                                        $this.parents('.record').fadeOut("slow", function () {
+                                            $this.parents('.record').remove();
+                                        });
+                                    }
+                                    else {
+                                        alert(resp.message)
+                                    }
+                                },
+                                error: function(resp) {
+                                    console.log("Something went wrong");
+                                    }
+                                })
+                            }
+                        })
+                    },
+                    error : function(xhr,errmsg,err) {
+                        window.alert("User doesn't exists");
+                    }
+                });
+            })
+        </script>
+  <script>
+      $(".link-delete").on("click", function(e){
+                e.preventDefault();
+                var $this = $(this);
+                if (confirm("You are going to remove one of your targets. \nAre you sure?")){
+                    $.ajax({
+                        url: $this.attr("href"),
+                        type: "GET",
+                        dataType: "json",
+                        success: function(resp) {
+                            if (resp.message === 'success') {
+                                $this.parents('.record').fadeOut("slow", function () {
+                                    $this.parents('.record').remove();
+                                });
+                            }
+                            else {
+                                alert(resp.message)
+                            }
+                        },
+                        error: function(resp) {
+                            console.log("Something went wrong");
+                        }
+                    })
+                }
+            })
 
-
+  </script>
+<footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-29ff"><div class="u-clearfix u-sheet u-sheet-1">
+        <p></p>
+        <p class="u-small-text u-text u-text-variant u-text-1">Here you can manage your project</p>
+        <p></p>
+      </div></footer>
 </body></html>

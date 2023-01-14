@@ -4,6 +4,16 @@
  * Copyright 2014-2021 Froala Labs
  */
 
+.button-container-div {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #ff8899;
+            display: grid;
+        }
+.red_color {
+    background-color: red;
+}
+
 .fr-clearfix::after {
   clear: both;
   display: block;
@@ -38773,5 +38783,5 @@ a.u-link.u-text-hover-grey-90:hover {
 }
 
  /*begin-variables base-font-size*/ 
- html { font-size: 16px; }
+
  /*end-variables base-font-size*/

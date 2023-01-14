@@ -8,13 +8,14 @@ from teams.models import Teams_list
 from user_home.models import User_acc
 from to_do_list.models import Task
 import simplejson as json
+import json as jsons
 from django.contrib.auth.models import User
 from datetime import datetime as dt
 from django.contrib import messages
 from django.utils.dateparse import parse_date, parse_datetime
 from itertools import zip_longest
 from django.http import JsonResponse
-
+import ast
 
 def list_projects(request):
     data = Project_list.objects.filter(owner=request.user.username)
@@ -88,7 +89,7 @@ def manage_deadlines(request):
     data = Project_list.objects.get(name=project_name)
     jsonDec = json.decoder.JSONDecoder()
 
-    if request.method == 'POST':
+    if request.POST.get('action') == 'post':
         if dt.strptime(request.POST.get('date'), '%Y-%m-%d') <  dt.now():
             messages.error(request, "Deadline must be after this day, sorry you can't reverse your mistakes :(")
         else:
@@ -107,6 +108,7 @@ def manage_deadlines(request):
                 data.deadlines_name = json.dumps(deadline_name + [request.POST.get('deadline')])
 
             data.save()
+        return JsonResponse({"message" : "success", "deadline_name" : request.POST.get('deadline'), "deadline_text" : request.POST.get('message'), "deadline_date" : request.POST.get('date')}, status = 200)
 
 
     if data.deadlines is None:
@@ -129,23 +131,20 @@ def delete_project(request):
 def delete_deadline(request):
     to_delete = request.GET.get('deadline_name')
     project = request.GET.get('project_name')
-    jsonDec = json.decoder.JSONDecoder()
-    return redirect('/projects/manage_deadlines?project_name=' + project)
 
     data = Project_list.objects.get(name=project)
+    deadline_date_list = ast.literal_eval(data.deadlines)
+    deadline_text_list = ast.literal_eval(data.deadlines_text)
+    deadline_name_list = ast.literal_eval(data.deadlines_name)
 
-    deadline = jsonDec.decode(data.deadlines)
-    deadline_name = jsonDec.decode(data.deadlines_name)
-    deadline_text = jsonDec.decode(data.deadlines_text)
+    remove = deadline_name_list.index(to_delete)
+    deadline_text_list.pop(remove)
+    deadline_date_list.pop(remove)
+    deadline_name_list.pop(remove)
 
+    data.deadlines = json.dumps(deadline_date_list)
+    data.deadlines_name = json.dumps(deadline_name_list)
+    data.deadlines_text = json.dumps(deadline_text_list)
 
-    index = deadline_name.index(to_delete)
-
-
-
-    data.deadlines = json.dumps(deadline.pop(index))
-    data.deadlines_text = json.dumps(deadline_text.pop(index))
-    data.deadlines_name = json.dumps(deadline_name.pop(index))
     data.save()
-
-    return redirect('/projects/manage_deadlines?project_name='+ project)
+    return JsonResponse({"message" : "success"}, status=200)
