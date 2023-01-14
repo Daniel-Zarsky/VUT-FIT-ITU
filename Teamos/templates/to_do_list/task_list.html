@@ -73,19 +73,22 @@
 
               <div class="u-container-layout u-container-layout-2">
                 <div class="u-countdown u-countdown-1" data-timer-id="6033" data-type="to-date" data-target-date="{{Task.date}}" data-for="everyone" data-direction="down">
-                  <div class="u-countdown-wrapper u-spacing-20">
+                  <div class="u-countdown-wrapper u-spacing-5">
                     <div class="u-countdown-item u-countdown-years u-hidden u-spacing-10">
-                      <div class="u-countdown-counter u-countdown-counter-1"><div class="u-countdown-number">0</div><div class="u-countdown-number u-hidden">0</div></div>
-                      <div class="u-countdown-label u-countdown-label-1"></div>
+                      <div class="u-countdown-counter u-countdown-counter-1">  <div class="u-countdown-number">0</div><div class="u-countdown-number u-hidden">0</div></div>
+                      <div class="u-countdown-label u-countdown-label-1"> </div>
+
                     </div>
-                    <strong><p>Deadline:{{ Task.deadline |date:'Y-m-d H:i' }}</strong>
+
                   </div>
                 </div>
-                <h5 class="u-text " id="name_of_task">{{Task.name}}</h5><span class="u-file-icon u-icon u-icon-1"><img src="{% static 'to_do_list/images/1828970.png' %}" alt=""></span><span class="u-file-icon u-icon u-icon-2"><img src="{% static 'to_do_list/images/1828970.png' %}" alt=""></span><span class="u-file-icon u-icon u-icon-3"><img src="{% static 'to_do_list/images/1828970.png' %}" alt=""></span>
+                <strong><h3 class="u-text " id="name_of_task">{{Task.name}}</h3></strong><h5>Deadline:{{ Task.deadline |date:' Y-m-d H:i' }}</h5>
               </div>
+                <strong><h3 class="u-text" >Priority: {{Task.priority}}</h3></strong>
+
+
 
             </div>   <span class="u-icon u-icon-4"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 50 50" style=""><use xlink:href="#svg-312c"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 50 50" x="0px" y="0px" id="svg-312c" style="enable-background:new 0 0 50 50;">
-
 
               <a class="done-button" href="{% url 'to_do_list:task_done' Task.name %}"><circle style="fill:#25AE88;" cx="25" cy="25" r="25"></circle></a>
 
@@ -105,6 +108,7 @@
           </center>
 
     {% endfor %}
+
   <script>
       console.log("js called")
            $(".delete-button").on("click", function(e) {
