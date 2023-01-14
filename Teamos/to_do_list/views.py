@@ -7,25 +7,55 @@ from projects.models import Project_list
 from django.views import View
 from django.http import JsonResponse
 
-#main view of all the tasks with asynchronous communication
+
+# main view of all the tasks with asynchronous communication
+
 class TaskUpdateDone(View):
+
+    def get(self, request, pk, *args, **kwargs):
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            task = Task.objects.get(name=pk)
+            task.done = True
+            return JsonResponse({"message": "success"}, status=200)
+
+        return JsonResponse({"message": "Wrong route"}, status=404)
+
+
+# main view of all the tasks with asynchronous communication
+class TaskUpdateDelete(View):
     def get(self, request, pk, *args, **kwargs):
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             task = Task.objects.get(name=pk)
             task.delete()
             return JsonResponse({"message": "success"}, status=200)
 
-        print("fail")
         return JsonResponse({"message": "Wrong route"}, status=404)
+
+
+class TaskShowDone(View):
+    def get(self, request):
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+
+            all_tasks = Task.objects.all() #all tasks
+            name = [] #array for done tasks
+            for t in all_tasks:
+                if t.done:                 #if task is done
+                    name = name + [t.name] #add it to the array
+
+            return JsonResponse({'instance': name}, status=200)
+
+        return JsonResponse({"message": "Wrong route"}, status=404)
+
 
 # function for viewing the list of tasks synchronously
 @login_required(login_url='login')
 def tasklist(request):
     data = Task.objects.filter(done=False)
     print(data)
-    return render(request, 'to_do_list/Page-1.html', {'data': data})
+    return render(request, 'to_do_list/task_list.html', {'data': data})
 
-#function to view a formular for creating tasks
+
+# function to view a formular for creating tasks
 def addTask(request):
     if request.POST.get('action') == 'post':
         print("tu")
@@ -39,9 +69,9 @@ def addTask(request):
             return render(request, 'to_do_list/invalid_prio.html')
 
         else:
-             print("project = ", project)
-             task = Task(name=name, description=description, project=project, deadline=deadline, priority=priority)
-             task.save()
+            print("project = ", project)
+            task = Task(name=name, description=description, project=project, deadline=deadline, priority=priority)
+            task.save()
 
         return JsonResponse({"instance": name}, status=200)
 
@@ -53,22 +83,22 @@ def addTask(request):
             if request.user.username in item.owner:
                 match = match + [item.name]
 
-        return render(request, 'to_do_list/Page-2.html', {'projects': match})
+        return render(request, 'to_do_list/new_task.html', {'projects': match})
 
 
+# functions for rendering other pages
 def submit_task(request):
     # save task to database and send others
-    return render(request, 'to_do_list/Page-1.html')
+    return render(request, 'to_do_list/task_list.html')
+
 
 def home(request):
     return render(request, 'user_home/user_home.html')
 
+
 def view_teams(request):
     return render(request, 'teams/list.html')
 
+
 def view_projects(request):
     return render(request, 'projects/list.html')
-
-
-
-

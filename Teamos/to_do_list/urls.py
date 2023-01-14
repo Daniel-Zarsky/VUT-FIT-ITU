@@ -10,5 +10,7 @@ urlpatterns = [
     path("home", views.home, name='home'),
     path("view_teams", views.view_teams, name='view_teams'),
     path("view_projects", views.view_projects, name='view_projects'),
-    path("process_completed/<str:pk>/", views.TaskUpdateDone.as_view(), name='process_completed')
+    path("task_delete/<str:pk>/", views.TaskUpdateDelete.as_view(), name='task_delete'),
+    path("task_done/<str:pk>/", views.TaskUpdateDone.as_view(), name='task_done'),
+    path("show_done", views.TaskShowDone.as_view(), name='show_done')
 ]
