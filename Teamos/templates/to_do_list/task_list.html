@@ -20,9 +20,20 @@
 		"name": "",
 		"logo": "{% static 'to_do_list/images/teamos_logo.png'%}"
 }</script>
-    <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Page 1">
-    <meta property="og:type" content="website">
+<style>
+#panel {
+  padding: 50px;
+  text-align: left;
+  background-color: #e5eecc;
+  border: solid 1px #c3c3c3;
+}
+
+#panel {
+  padding: 20px;
+  display: none;
+}
+</style>
+
   </head>
   <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-1255"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="{% url 'home' %}"  class="u-image u-logo u-image-1">
@@ -59,8 +70,9 @@
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
           </div>
         </nav>
-        <a id="show_done" href="{% url 'to_do_list:show_done'%}" class="show-done u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2">SHOW DONE</a>
-        <a href="{% url 'to_do_list:addTask' %}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">ADD NEW TASK</a>
+      <a href="{% url 'to_do_list:addTask' %}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">ADD NEW TASK</a>
+         <a id="show_done" href="{% url 'to_do_list:show_done'%}" class="show-done u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2">SHOW DONE</a>
+      <div id="panel"><p id="done">No tasks done yet.</p><a class=" hide-done u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">Hide done</a></div>
       </div></header>
      {% for Task in data %}
 
@@ -82,7 +94,7 @@
 
                   </div>
                 </div>
-                <strong><h3 class="u-text " id="name_of_task">{{Task.name}}</h3></strong><h5>Deadline:{{ Task.deadline |date:' Y-m-d H:i' }}</h5>
+                <strong><h3 class="u-text " id="name_of_task">{{Task.name}}</h3></strong><h5>Deadline:{{ Task.deadline}}</h5>
               </div>
                 <strong><h3 class="u-text" >Priority: {{Task.priority}}</h3></strong>
 
@@ -159,7 +171,6 @@
                         success:function (json){
                             console.log("task done")
                             if (json.message === "success"){
-                                 alert("Task done!")
                                  $this.parents('.record').fadeOut('slow', function(){
                                      $this.parents('.record').hide();
                                  })
@@ -185,10 +196,12 @@
 
                         success:function (json){
                             console.log("data recieved from django in jq")
-                            let name_list = json.name
+                            var name_list = json.name
                             console.log(name_list.toString())
-                            alert(name_list.toString())
 
+                             $("#panel").slideDown("slow");
+
+                             $("#done").text(name_list.toString());
 
                         },
                         error : function(xhr,errmsg,err) {
@@ -197,9 +210,13 @@
                         }
                                 });
                             });
-
+            $(".hide-done").on("click", function(e) {
+                    console.log("button active")
+                    $("#panel").slideUp("slow");
+            });
 
   </script>
+
 
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-98e9"><div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">List of your task, which have you created or someone else has assigned them to you.</p>

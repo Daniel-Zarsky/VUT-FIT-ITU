@@ -63,8 +63,8 @@
               </div>
 
             <div class="u-form-date u-form-group u-form-group-5">
-              <label for="date-c794" class="u-label">Date</label>
-              <input type="datetime-local" placeholder="MM/DD/YYYY" id="date-c794" name="date" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" >
+              <label for="deadline" class="u-label">Date</label>
+              <input type="date" placeholder="MM/DD/YYYY" id="deadline" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" >
             </div>
               <div class="u-form-date u-form-group u-form-group-6">
               <label for="date-c774" class="u-label">Priority</label>
@@ -92,7 +92,7 @@
                          task_name: $("#name-af1b").val(),
                          task_description: $("#message-af1b").val(),
                          project: $("#proj").val(),
-                         deadline: $("#date-c794").val(),
+                         deadline: $("#deadline").val(),
                          priority: $("#date-c774").val(),
 
                         csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),

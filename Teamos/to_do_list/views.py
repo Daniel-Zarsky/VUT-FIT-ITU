@@ -7,7 +7,7 @@ from projects.models import Project_list
 from django.views import View
 from django.http import JsonResponse
 import json
-
+from datetime import datetime as dt
 
 # main view of all the tasks with asynchronous communication
 
@@ -66,7 +66,7 @@ def addTask(request):
         name = request.POST.get('task_name')
         description = request.POST.get('task_description')
         project = request.POST.get('project')
-        deadline = request.POST.get('deadline')
+        deadline = dt.strptime(request.POST.get('deadline'), "%Y-%m-%d").date()
         priority = request.POST.get('priority')
 
         if int(priority) > 10 or int(priority) < 0:
