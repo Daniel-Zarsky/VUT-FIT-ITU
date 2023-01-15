@@ -8,6 +8,7 @@ from django.views import View
 from django.http import JsonResponse
 import json
 from datetime import datetime as dt
+from django.shortcuts import redirect
 
 # main view of all the tasks with asynchronous communication
 
@@ -101,7 +102,7 @@ def submit_task(request):
 
 
 def home(request):
-    return render(request, 'user_home/user_home.html')
+    return redirect('/user_home')
 
 
 def view_teams(request):

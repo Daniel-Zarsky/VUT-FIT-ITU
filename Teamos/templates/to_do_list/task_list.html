@@ -94,10 +94,10 @@
                   </div>
                 </div>
                 <strong><h3 class="u-text " id="name_of_task">{{Task.name}}</h3></strong><h5>Deadline:{{ Task.deadline}}</h5>
-              </div>
 
 
-
+                <span class="u-file-icon u-icon u-hidden u-icon-1"><img src="{% static 'to_do_list/images/folder.png' %}" alt=""></span><span class="u-file-icon u-icon u-icon-2"><a class="u-image u-image-circle u-image-1 describe" value="{{Task.description}}"><img src="{% static 'to_do_list/images/bigfolder.png' %}" alt=""></a></span><span class="u-file-icon u-hidden u-icon u-icon-3"><img src="{% static 'to_do_list/images/1828970.png' %}" alt=""></span>
+                </div>
             </div>   <span class="u-icon u-icon-4"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 50 50" style=""><use xlink:href="#svg-312c"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 50 50" x="0px" y="0px" id="svg-312c" style="enable-background:new 0 0 50 50;">
 
               <a class="done-button" href="{% url 'to_do_list:task_done' Task.name %}"><circle style="fill:#25AE88;" cx="25" cy="25" r="25"></circle></a>
@@ -219,10 +219,16 @@
                     console.log("button active")
                     $("#panel").slideUp("slow");
 
-
-
-
+                });
+            $(".describe").on("click", function(e) {
+                console.log("button active")
+                e.preventDefault();
+                var $this = $(this);
+                var des = $this.attr("value");
+                console.log(des);
+                window.alert(des);
             });
+
 
   </script>
 
