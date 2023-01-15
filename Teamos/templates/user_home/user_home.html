@@ -1,61 +1,66 @@
-<!DOCTYPE html>
 <!-- Samuel Simun xsimun04@fit.vutbr.cz-->
+<!DOCTYPE html>
+{% load static %}
 <html style="font-size: 16px;" lang="en"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>User home</title>
-    {% load static %}
+    <title>Page 2</title>
+    <link rel="stylesheet" href="{% static 'user_home/Page-5.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'user_home/nicepage.css' %}" media="screen">
-<link rel="stylesheet" href="{% static 'user_home/Page-2.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'user_home/Page-2.css' %}" media="screen">
     <script class="u-script" type="text/javascript" src="{% static 'user_home/jquery.js' %}" defer=""></script>
     <script class="u-script" type="text/javascript" src="{% static 'user_home/nicepage.js' %}" defer=""></script>
     <meta name="generator" content="Nicepage 5.1.5, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
-
-
-    <script type="application/ld+json">{
-		"@context": "http://schema.org",
-		"@type": "Organization",
-		"name": "WebSite3418080",
-		"logo": "{% static 'user_home/images/default-logo.png' %}"
-}</script>
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="Page 2">
     <meta property="og:type" content="website">
   </head>
-  <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-b4e3"><div class="u-clearfix u-sheet u-sheet-1">
-        <a href="{% url 'home' %}" class="u-image u-logo u-image-1">
-          <img src="{% static 'to_do_list/images/teamos_logo.png' %}" class="u-logo-image u-logo-image-1">
-        </a>
-        <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
-          <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
-            <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
-              <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
-              <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
-</g></svg>
-            </a>
-          </div>
-          <div class="u-custom-menu u-nav-container">
-                    <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_todo' %}" style="padding: 10px 20px;">Tasks</a>
 
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'home' %}" style="padding: 10px 20px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_teams' %}" style="padding: 10px 20px;">Teams</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_projects' %}" style="padding: 10px 20px;">Projects</a>
-</li></ul>
+  <section class="hidden modal" id="sec-6e73">
+      <div class="u-clearfix u-sheet u-align-center u-valign-middle u-sheet-1 u-section-1">
+        <div class="u-align-center u-border-4 u-border-grey-75 u-container-style u-grey-5 u-group u-radius-21 u-shape-round u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <h1 class="invitations u-text u-text-default u-text-1">My invitations</h1>
+            <a class="btn-close u-border-none u-btn u-btn-round u-button-style u-color-scheme-summer-time u-color-style-multicolor-1 u-palette-1-light-1 u-radius-50 u-btn-5">Go back</a>
           </div>
-          <div class="u-custom-menu u-nav-container-collapse">
-            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-              <div class="u-inner-container-layout u-sidenav-overflow">
-                <div class="u-menu-close"></div>
-                       <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_todo' %}" style="padding: 10px 20px;">Tasks</a>
+        </div>
+      </div>
+    </section>
+    <div class="overlay hidden"></div>
+          <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-b4e3"><div class="u-clearfix u-sheet u-sheet-1">
+                <a href="{% url 'home' %}" class="u-image u-logo u-image-1">
+                  <img src="{% static 'to_do_list/images/teamos_logo.png' %}" class="u-logo-image u-logo-image-1">
+                </a>
+                <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
+                  <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+                    <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
+                      <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+                      <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+                        </g></svg>
+                                    </a>
+                                  </div>
+                                  <div class="u-custom-menu u-nav-container">
+                                            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_todo' %}" style="padding: 10px 20px;">Tasks</a>
 
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'home' %}" style="padding: 10px 20px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_teams' %}" style="padding: 10px 20px;">Teams</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_projects' %}" style="padding: 10px 20px;">Projects</a>
-</li></ul>
+                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'home' %}" style="padding: 10px 20px;">Home</a>
+                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_teams' %}" style="padding: 10px 20px;">Teams</a>
+                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_projects' %}" style="padding: 10px 20px;">Projects</a>
+                        </li></ul>
+                                  </div>
+                                  <div class="u-custom-menu u-nav-container-collapse">
+                                    <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+                                      <div class="u-inner-container-layout u-sidenav-overflow">
+                                        <div class="u-menu-close"></div>
+                                               <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_todo' %}" style="padding: 10px 20px;">Tasks</a>
+
+                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'home' %}" style="padding: 10px 20px;">Home</a>
+                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_teams' %}" style="padding: 10px 20px;">Teams</a>
+                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{% url 'redirect_projects' %}" style="padding: 10px 20px;">Projects</a>
+                        </li></ul>
               </div>
             </div>
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
@@ -75,9 +80,9 @@
                       <h4 class="u-text u-text-default u-text-1">Hello {{ user.username }}</h4>
                     </div>
                   </div>
-                  <div class="u-align-left u-container-style u-layout-cell u-palette-1-base u-radius-30 u-shape-round u-size-20 u-layout-cell-2" data-href="Home.html" title="Home">
+                  <div class=" btn-open u-align-left u-container-style u-layout-cell u-palette-1-base u-radius-30 u-shape-round u-size-20 u-layout-cell-2" title="Home">
                     <div class="u-container-layout u-valign-top u-container-layout-2"><span class="u-black u-file-icon u-icon u-icon-circle u-icon-1"><img src="{% static 'user_home/images/1827347.png' %}" alt=""></span>
-                      <h4 class="u-custom-font u-font-montserrat u-text u-text-default u-text-2"> Website Design</h4>
+                      <h4 class="u-custom-font u-font-montserrat u-text u-text-default u-text-2"> My invitations</h4>
 
                     </div>
                   </div>
@@ -107,7 +112,6 @@
                   <div class="u-align-left u-container-style u-layout-cell u-radius-30 u-shape-round u-size-20 u-white u-layout-cell-5" data-href="redirect_todo">
                     <div class="u-container-layout u-container-layout-5"><span class="u-file-icon u-icon u-icon-circle u-palette-1-base u-text-black u-icon-4"><img src="{% static 'user_home/images/833593.png' %}" alt=""></span>
                       <h4 class="u-custom-font u-font-montserrat u-text u-text-default u-text-6">To Do List</h4>
-                        <img class="u-image u-preserve-proportions u-image-1" src="{% static 'to_do_list/images/1198703521579156625-128.png' %}" alt="" data-image-width="1280" data-image-height="1280">
                     </div>
                   </div>
                   <div class="u-align-left u-container-style u-layout-cell u-palette-1-base u-radius-30 u-shape-round u-size-20 u-layout-cell-6" data-href="log_out">
@@ -121,11 +125,105 @@
           </div>
         </div>
       </div>
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <script>
+            const modal = document.querySelector(".modal");
+            const overlay = document.querySelector(".overlay");
+            const openModalBtn = document.querySelector(".btn-open");
+            const closeModalBtn = document.querySelector(".btn-close");
+
+
+            const closeModal = function () {
+              modal.classList.add("hidden");
+              overlay.classList.add("hidden");
+              var elements = document.getElementsByClassName(".item");
+              while(elements.length > 0){
+                  elements[0].parentNode.removeChild(elements[0]);
+              }
+            };
+
+            closeModalBtn.addEventListener("click", closeModal);
+
+
+            const openModal = function () {
+              modal.classList.remove("hidden");
+              overlay.classList.remove("hidden");
+              $.ajax({
+                  type: "GET",
+                  url: "/user_home/get_invitations",
+                  success:function (resp){
+                      const data = JSON.parse(resp.project)
+                      $.each(data , function (index, resp1){
+                          $(".invitations").after("" +
+                              "<div class=\" item u-container-style u-group u-palette-1-base u-radius-10 u-shape-round u-group-3\">\n" +
+                              "              <div class=\"u-container-layout u-container-layout-3\">\n" +
+                              "                <h2 class=\"u-text u-text-3\">"+ resp1 + "</h2>\n" +
+                              "                <a href=\"/user_home/accept_invitation?project=" + resp1 + "\"  class=\" accept u-border-none u-btn u-button-style u-palette-4-base u-btn-3\">Accept</a>\n" +
+                              "                <a href=\"/user_home/decline_invitation?project=" + resp1 + "\" class=\" decline u-border-none u-btn u-button-style u-palette-2-base u-btn-4\">Remove</a>\n" +
+                              "              </div>\n" +
+                              "            </div>")
+
+                      $(".accept").on("click", function(e){
+                        e.preventDefault();
+                        var $this = $(this);
+                            $.ajax({
+                                url: $this.attr("href"),
+                                type: "GET",
+                                dataType: "json",
+                                success: function(resp) {
+                                    if (resp.message === 'success') {
+                                        $this.parents('.item').fadeOut("slow", function () {
+                                            $this.parents('.item').remove();
+                                        });
+                                    }
+                                    else {
+                                        alert(resp.message)
+                                    }
+                                },
+                                error: function(resp) {
+                                    console.log("Something went wrong : " + resp.message );
+                                }
+                            })
+                        })
+                      $(".decline").on("click", function(e){
+                        e.preventDefault();
+                        var $this = $(this);
+                            $.ajax({
+                                url: $this.attr("href"),
+                                type: "GET",
+                                dataType: "json",
+                                success: function(resp) {
+                                    if (resp.message === 'success') {
+                                        $this.parents('.item').fadeOut("slow", function () {
+                                            $this.parents('.item').remove();
+                                        });
+                                    }
+                                    else {
+                                        alert(resp.message)
+                                    }
+                                },
+                                error: function(resp) {
+                                    console.log("Something went wrong : " + resp.message );
+                                }
+                            })
+                        })
+
+                      })
+                  },
+                  error : function(xhr,errmsg,err) {
+                        window.alert("Error ocured :" + xhr.message);
+                    }
+              })
+            };
+
+            openModalBtn.addEventListener("click", openModal);
+      </script>
+
     </section>
-    
-    
+
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-29ff"><div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">Welcome to your home page.</p>
+        <p></p>
       </div></footer>
 
 </body></html>
