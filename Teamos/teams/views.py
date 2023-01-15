@@ -20,14 +20,29 @@ from .form import Create_form
 import ast
 
 
-class TaskUpdateDeleteView(View):
-    def get(self, request, pk, *args, **kwargs):
-        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-            team = Teams_list.objects.get(name=pk)
-            team.invited = []
-            team.save()
-            return JsonResponse({"message": "success"})
-        return JsonResponse({"message": "Wrong route"})
+def delete_member(request) :
+    team_name = request.GET.get('team')
+    user_name = request.GET.get('user')
+    print(team_name)
+    print(user_name)
+    team = Teams_list.objects.get(name=team_name)
+    user = User_acc.objects.get(name=user_name)
+
+    team_invited = ast.literal_eval(team.invited)
+    user_invited = ast.literal_eval(user.invited)
+
+    to_delete = team_invited.index(user_name)
+    team_invited.pop(to_delete)
+
+    to_delete = user_invited.index(team_name)
+    user_invited.pop(to_delete)
+
+    team.invited = json.dumps(team_invited)
+    user.invited = json.dumps(user_invited)
+
+    user.save()
+    team.save()
+    return JsonResponse({"message" : "success"})
 
 
 class TaskUpdateAddView(View):
@@ -101,11 +116,22 @@ def invite_people(request):
     if request.POST.get('action') == 'post':
         new = request.POST.get('name')
         if not User_acc.objects.filter(name=new).exists():
-            return JsonResponse({"instance": "User doesn't exists"}, status=404)
+            return JsonResponse({"error": "User doesn't exists"}, status=400)
 
         else:
             team_data = Teams_list.objects.get(name=team_name)
             user_data = User_acc.objects.get(name=new)
+
+            team_members = ast.literal_eval(team_data.members)
+            if new in team_members:
+                return JsonResponse({"error" : "User is already member!"}, status=400)
+
+            if team_data.invited is None:
+                team_invited =[]
+            else:
+                team_invited = ast.literal_eval(team_data.invited)
+            if new in team_invited:
+                return JsonResponse({"error" : "User is already invited!"}, status=400)
 
             if user_data.invited is None:
                 user_data.invited = json.dumps([team_name])

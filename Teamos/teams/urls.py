@@ -10,6 +10,6 @@ urlpatterns = [
     path('', views.list, name='list'),
     path('create_new', views.create_new, name='create_new'),
     path('invite', views.invite_people, name='invite'),
-    path('delete_member/<str:pk>/', views.TaskUpdateDeleteView.as_view(), name="delete" ),
+    path('delete_member', views.delete_member, name="delete_member"),
     path("leave_team", views.leave_team, name="leave_team")
 ]

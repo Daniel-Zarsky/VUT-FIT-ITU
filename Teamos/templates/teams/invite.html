@@ -98,7 +98,7 @@
             <img class="u-image u-image-circle u-preserve-proportions u-image-1" src="{% static 'teams/images/3f0b5310fb7c82a76de1b3e482a3a273315fbbebbdf4f2d0bfbb8a16ba16b03a4a19627c3bcc2f4f17126f1c6869e849d06c7bfc98367c5a0b0472_1280.png' %}" alt="" data-image-width="1280" data-image-height="1280">
             <p class="u-text u-text-default u-text-2">{{user}}</p>
             <p class="u-text u-text-default u-text-3">Invited<br>
-            <a id="button-{{user}}" href="{% url 'teams:delete' team_name %}" class="link-delete u-btn u-button-style ">Remove</a>
+            <a id="button-{{user}}" href="/teams/delete_member?team={{team_name}}&user={{user}}" class="link-delete u-btn u-button-style ">Remove</a>
             </p>
           </div>
         </div>
@@ -126,7 +126,7 @@
                             "            <img class=\"u-image u-image-circle u-preserve-proportions u-image-1\" src=\"{% static 'teams/images/3f0b5310fb7c82a76de1b3e482a3a273315fbbebbdf4f2d0bfbb8a16ba16b03a4a19627c3bcc2f4f17126f1c6869e849d06c7bfc98367c5a0b0472_1280.png' %}\" alt=\"\" data-image-width=\"1280\" data-image-height=\"1280\">\n" +
                             "            <p class=\"u-text u-text-default u-text-2\">" + resp.instance +"</p>\n" +
                             "            <p class=\"u-text u-text-default u-text-3\">Invited<br>\n" +
-                            "            <a id=\"button-" + resp.instance + "\" href=\"{% url 'teams:delete' team_name %}\" class=\"link-delete u-btn u-button-style \">Remove</a>\n" +
+                            "            <a id=\"button-" + resp.instance + "\" href=\"/teams/delete_member?team={{team_name}}&user=" + resp.instance + " \" class=\"link-delete u-btn u-button-style \">Remove</a>\n" +
                             "            </p>\n" +
                             "          </div>\n" +
                             "        </div>").toggleClass("record");
@@ -155,8 +155,8 @@
                         }
                     })
                     },
-                    error : function(xhr,errmsg,err) {
-                        window.alert("User doesn't exists");
+                    error : function(resp) {
+                        window.alert(resp.responseJSON.error);
                     }
                 });
             })

@@ -19,8 +19,6 @@
 </style>
     <link rel="stylesheet" href="{% static 'user_home/nicepage.css' %}" media="screen">
 <link rel="stylesheet" href="{% static 'projects/Page-3.css' %}" media="screen">
-    <script class="u-script" type="text/javascript" src="{% static 'projects/jquery.jss' %}" defer=""></script>
-    <script class="u-script" type="text/javascript" src="{% static 'projects/nicepage.jss' %}" defer=""></script>
     <meta name="generator" content="Nicepage 5.1.5, nicepage.com">
     <meta name="referrer" content="origin">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -64,7 +62,7 @@
       <div class="u-clearfix u-sheet u-sheet-1">
         <h2 class="u-text u-text-default u-text-1">Enter please name of the project</h2>
         <div class="u-form u-form-1">
-          <form action="create_new" method="post" class="u-clearfix u-form-horizontal u-form-spacing-15 u-inner-form" style="padding: 15px" >
+          <form id="create_new_form" action="" method="post" class="u-clearfix u-form-horizontal u-form-spacing-15 u-inner-form" style="padding: 15px" >
               {% csrf_token %}
             <div class="u-form-group u-form-name u-label-top u-form-group-1">
               <label for="name-558c" class="u-label">Name</label>
@@ -87,14 +85,36 @@
               <div class="u-form-group u-form-submit u-label-top u-form-group-2">
               <input type="submit" value="Create" class="u-btn u-btn-submit u-button-style">
             </div>
-
           </form>
-            {% for message in messages %}
-                <p>{{message}}</p>
-            {% endfor %}
-
         </div>
       </div>
-                  <a href="/projects" class="u-btn u-btn-submit u-button-style ">Take me back</a>
+        <a href="/projects" class="u-btn u-btn-submit u-button-style ">Take me back</a>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            $("#create_new_form").submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: '/projects/create_new',
+                    data :{
+                        name: $("#name-558c").val(),
+                        team: $("#lang").val(),
+                        deadline: $("#name-558ca").val(),
+                        csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
+                        action : "post"
+                    },
+                    success:function (json){
+                        var address = "/projects/show_timeline?project_name="
+                        var project_name = json.message
+                        var res = address.concat(project_name);
+                        $(location).attr('href', res);
+                    },
+                    error : function(resp) {
+                        window.alert(resp.responseJSON.message);
+                    }
+                });
+            })
+        </script>
     </section>
-</body></html>
+</body>
+</html>
