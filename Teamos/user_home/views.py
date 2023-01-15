@@ -11,6 +11,7 @@ from django.http import JsonResponse
 
 
 from .models import User_acc
+from teams.models import Teams_list
 
 
 
@@ -43,11 +44,12 @@ def get_invitations(request):
 def accept_invitation(request):
     project = request.GET.get('project')
     user = User_acc.objects.get(name=request.user.username)
+    team = Teams_list.objects.get(name=project)
 
     if user.member is None:
         user_member = []
     else:
-        user_member = ast.literal_eval(user.invited)
+        user_member = ast.literal_eval(user.member)
 
     user_invited = ast.literal_eval(user.invited)
 
@@ -59,6 +61,18 @@ def accept_invitation(request):
     user.invited = json.dumps(user_invited)
     user.member = json.dumps(user_member)
     user.save()
+
+    team_member = ast.literal_eval(team.members)
+    team_invitations = ast.literal_eval(team.invited)
+
+    to_delete = team_invitations.index(request.user.username)
+    team_invitations.pop(to_delete)
+
+    team_member.append(request.user.username)
+
+    team.invited = json.dumps(team_invitations)
+    team.members = json.dumps(team_member)
+    team.save()
     return JsonResponse({"message" : "success"}, status=200)
 
 def decline_invitation(request):

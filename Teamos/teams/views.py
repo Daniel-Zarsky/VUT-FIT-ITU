@@ -38,14 +38,38 @@ class TaskUpdateAddView(View):
 @login_required(login_url='login')
 def list(request):
     data = User_acc.objects.get(name=request.user.username)
-    teams = ast.literal_eval(data.member)
-
     out = []
-    for team in teams:
-        out.append(Teams_list.objects.get(name=team))
+    print(data.member)
+    if data.member is None:
+        pass
+    else:
+        teams = ast.literal_eval(data.member)
+        for team in teams:
+            out.append(Teams_list.objects.get(name=team))
 
     return render(request, 'teams/list.html', {'data': out})
 
+def leave_team(request):
+    team_name = request.GET.get('team')
+    user = User_acc.objects.get(name=request.user.username)
+    team = Teams_list.objects.get(name=team_name)
+
+    user_member = ast.literal_eval(user.member)
+    team_members = ast.literal_eval(team.members)
+
+    to_delete = user_member.index(team_name)
+    user_member.pop(to_delete)
+
+    to_delete = team_members.index(request.user.username)
+    team_members.pop(to_delete)
+
+    user.member = json.dumps(user_member)
+    team.members = json.dumps(team_members)
+
+    print(user.member)
+    user.save()
+    team.save()
+    return JsonResponse({"message" : "success"}, status=200)
 
 def create_new(request):
     if request.POST.get('action') == 'post':

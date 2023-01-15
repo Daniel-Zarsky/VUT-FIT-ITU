@@ -14,6 +14,10 @@
     <meta name="generator" content="Nicepage 5.1.5, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'teams/list.css' %}" media="screen">
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="Page 2">
     <meta property="og:type" content="website">
@@ -59,19 +63,80 @@
       <div class="u-clearfix u-sheet u-sheet-1">
         <a href="create_new" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">Create team</a>
         <p class="u-text u-text-default u-text-1">My Teams</p>
-        <a href="create_new" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2">my invintations</a>
-        {% for team in data %}
-        <img class="u-image u-image-circle u-preserve-proportions u-image-1 u-border-2 u-layout-row " src="{% static 'teams/images/default.jpg' %}" alt="" data-image-width="1280" data-image-height="1280" data-href="invite?team={{team.name}}" rel="nofollow">
-        <p class="u-align-center u-text u-text-2">{{team.name}}</p>
-        {% endfor %}
+        <a href="/user_home" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2">My invintations</a>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <p></p>
+
+        <div class="container">
+            {% for team in data %}
+            <div class="record col-xs-12 col-md-6 bootstrap snippets bootdeys">
+                <div class="product-content product-wrap clearfix">
+                    <div class="row">
+                            <div class="col-md-5 col-sm-12 col-xs-12">
+                                <div class="product-image">
+                                    <img src="{% static 'teams/images/default.jpg' %}" alt="194x228" class="img-responsive">
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-sm-12 col-xs-12">
+                            <div class="product-deatil">
+                                    <h5 class="name">
+                                        <a href="invite?team={{team.name}}">
+                                            {{team.name}}
+                                        </a>
+                                    </h5>
+                                    <span class="tag1"></span>
+                            </div>
+                            <div class="description">
+                                <p></p>
+                            </div>
+                            <div class="product-info smart-form">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <a href="invite?team={{team.name}}" class="btn btn-success">Invite new people</a>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6 ">
+                                        <a href="leave_team?team={{team.name}}" class="link-delete red_button btn btn-success">Leave team</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
       </div>
     </section>
 
-    
-    
+  <script>
+      $(".link-delete").on("click", function (e) {
+          e.preventDefault();
+          var $this = $(this);
+          if (confirm("Do you really want to leave this team?")) {
+              $.ajax({
+                  url: $this.attr("href"),
+                  type: "GET",
+                  dataType: "json",
+                  success: function (resp) {
+                      if (resp.message === 'success') {
+                          $this.parents('.record').fadeOut("slow", function () {
+                              $this.parents('.record').remove();
+                          });
+                      } else {
+                          alert(resp.message)
+                      }
+                  },
+                  error: function (resp) {
+                      console.log("Something went wrong : " + resp.message);
+                  }
+              })
+          }
+      })
+  </script>
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-29ff"><div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">Your teams are listed above.</p>
       </div></footer>
 
   
-</body></html>
+</body>
+</html>

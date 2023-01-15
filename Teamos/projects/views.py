@@ -18,8 +18,21 @@ from django.http import JsonResponse
 import ast
 
 def list_projects(request):
-    data = Project_list.objects.filter(owner=request.user.username)
-    return render(request, 'projects/list.html', {'data':data})
+    user = User_acc.objects.get(name=request.user.username)
+
+    if not user.member:
+        user_member = []
+        return render(request, 'projects/list.html', {'data': user_member})
+    else:
+        user_member = ast.literal_eval(user.member)
+    out = []
+    for i in user_member:
+        out.append(Project_list.objects.filter(team=i))
+
+    if not out:
+        return render(request, 'projects/list.html', {'data': user_member})
+
+    return render(request, 'projects/list.html', {'data':out[0]})
 
 
 def create_new(request):
