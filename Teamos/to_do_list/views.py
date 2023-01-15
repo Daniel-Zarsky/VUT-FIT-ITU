@@ -62,7 +62,11 @@ def tasklist(request):
 # function to view a formular for creating tasks
 def addTask(request):
     if request.POST.get('action') == 'post':
-        print("tu")
+
+        # check = Task.objects.all
+        # for task in check:
+        #     if task.name == request.POST.get('task_name'):
+        #         return JsonResponse({"message": "Task already exists!!!"""}, status=500)
         name = request.POST.get('task_name')
         description = request.POST.get('task_description')
         project = request.POST.get('project')
