@@ -12,6 +12,8 @@
     --color-dark-grey: #222831;
 }
 
+
+
 /*withe this font size, anywhere we use rem  our styling,  wl be translated to the rem X 10px, normally , 1
 1 rem is 16px*/
 html {
@@ -23,8 +25,114 @@ html {
 body {
     font-family: 'Open Sans', sans-serif;
 }
-  
-/* Start Here */
+
+.priority-0 {
+    background-color: #009D47;
+}
+
+.priority-1 {
+    background-color: #009E47;
+}
+
+.priority-2 {
+    background-color: #00753A;
+}
+.priority-3 {
+    background-color: #FFF735;
+}
+.priority-4 {
+    background-color: #FFCB35;
+}
+.priority-5 {
+    background-color: #FFA135;
+}
+.priority-6 {
+    background-color: #FF7435;
+}
+.priority-7 {
+    background-color: #FF7567;
+}
+.priority-8 {
+    background-color: #D82735;
+}
+.priority-9 {
+    background-color: #D82835;
+}
+.priority-10 {
+    background-color: #B21F35;
+}
+.priority--2 {
+    background-color: rgba(255,255,255,.2);
+}
+
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 56%;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
 .intro-text {
     background-color: var(--color-dark-grey);
     color: var(--white);
@@ -99,7 +207,6 @@ img {
     bottom: 0;
     padding: 1.5rem;
     /*glassmorphism effect*/
-    background: rgba(255,255,255,.2);
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
@@ -110,6 +217,10 @@ img {
     border-right: 2px solid rgba(255, 255, 255, 0.5);
     border: 1px solid rgba(255,255,255,0.2);
 }
+
+
+
+
 
 /* Triangle */
 .timeline-section ul li div::before {

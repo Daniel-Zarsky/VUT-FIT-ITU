@@ -147,7 +147,7 @@
                         })
                     },
                     error : function(xhr,errmsg,err) {
-                        window.alert("User doesn't exists");
+                        window.alert(xhr.responseJSON.message);
                     }
                 });
             })

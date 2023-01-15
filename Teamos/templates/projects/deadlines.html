@@ -24,23 +24,19 @@
             <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
               <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
               <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
-</g></svg>
+                </g></svg>
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
             <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/user_home" style="padding: 10px 20px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/projects" style="padding: 10px 20px;">Projects</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/to_do_list" style="padding: 10px 20px;">Tasks</a>
-</li></ul>
+            </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/projects" style="padding: 10px 20px;">Projects</a>
+            </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/to_do_list" style="padding: 10px 20px;">Tasks</a>
+            </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="#">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="#">Page 2</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Page-1.html">Page 1</a>
-</li></ul>
               </div>
             </div>
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
@@ -61,10 +57,22 @@
             </div>
             <div class="u-align-center">
                     <p></p>
-                    <a href="manage_deadlines?project_name={{project_name}}" class="u-align-center u-btn u-btn-submit u-button-style ">Manage project</a>
-                </div>
+                    <a href="manage_deadlines?project_name={{project_name}}" class="u-align-center u-btn u-btn-submit u-button-style ">Manage deadlines</a>
+            </div>
+                <div>
+                    <label class="container">Show deadlines
+                      <input type="checkbox" checked="checked">
+                      <span class="checkmark"></span>
+                    </label>
+
+                    <label class="container">Show tasks
+                      <input type="checkbox" checked="checked">
+                      <span class="checkmark"></span>
+                    </label>
+                    </div>
+                <p></p>
                 <li>
-                    <div>
+                    <div class="priority--1">
                       <p> Beginning </p>
                       <p></p>
                       <time>{{data_proj.start_of_project}} </time>
@@ -72,15 +80,24 @@
                     </div>
                 </li>
                 {% for data in list_data %}
-                <li>
-                  <div>
-                      <p>{{data.deadline_text}}</p>
-                    <time>{{data.deadline}}</time> {{data.deadline_name}}
-                  </div> 
-                </li>
+                    {% if data.priority == -2 %}
+                        <li>
+                          <div class="priority--2">
+                              <p>{{data.deadline_text}}</p>
+                            <time>{{data.deadline}}</time> {{data.deadline_name}}
+                          </div>
+                        </li>
+                    {% else %}
+                        <li>
+                          <div class="priority-{{data.priority}}">
+                              <p>{{data.deadline_text}}</p>
+                            <time>{{data.deadline}}</time> {{data.deadline_name}}
+                          </div>
+                        </li>
+                    {% endif %}
                 {% endfor %}
                 <li>
-                    <div>
+                    <div class="priority--1">
                        <p> The final deadline </p>
                       <time>{{data_proj.final_deadline}}</time> The End?
                     </div>
@@ -89,7 +106,6 @@
 
         </section>
     </main>
-    <script src="{% static 'projects/timeline.js' %}">
-    </script>
+    <script src="{% static 'projects/timeline.js' %}"></script>
 </body>
 </html>
