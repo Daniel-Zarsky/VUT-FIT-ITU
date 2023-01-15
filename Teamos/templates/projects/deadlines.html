@@ -65,27 +65,20 @@
                 </div>
                 <li>
                     <div>
-                        <!--Use the time tag-->
-                      <p> Nazov </p>
+                      <p> Beginning </p>
                       <p></p>
                       <time>{{data_proj.start_of_project}} </time>
-                      Lorem ipsum dolor sit amet consectetur adipisicing
-                      elit. Incidunt nostrum quidem eius repudiandae nam, nemo fuga
-                      architecto possimus id at rem beatae consequuntur dolor commodi.
+                      Why is the beginning always hard?
                     </div>
                 </li>
-
                 {% for data in list_data %}
-
                 <li>
                   <div>
-                      <p>{{data.deadline_name}}</p>
-                    <time>{{data.deadline}}</time> {{data.deadline_text}}
+                      <p>{{data.deadline_text}}</p>
+                    <time>{{data.deadline}}</time> {{data.deadline_name}}
                   </div> 
                 </li>
-
                 {% endfor %}
-
                 <li>
                     <div>
                        <p> The final deadline </p>

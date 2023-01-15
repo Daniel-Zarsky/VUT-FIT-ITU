@@ -17,16 +17,28 @@ from itertools import zip_longest
 from django.http import JsonResponse
 import ast
 
+
 def list_projects(request):
-    data = Project_list.objects.filter(owner=request.user.username)
-    return render(request, 'projects/list.html', {'data':data})
+    user = User_acc.objects.get(name=request.user.username)
+
+    if not user.member:
+        user_member = []
+        return render(request, 'projects/list.html', {'data': user_member})
+    else:
+        user_member = ast.literal_eval(user.member)
+        out = Project_list.objects.filter(team__in=user_member)
+    return render(request, 'projects/list.html', {'data': out})
 
 
 def create_new(request):
-    if request.method == 'POST':
+    if request.POST.get('action') == 'post':
         if dt.strptime(request.POST.get('deadline'), '%Y-%m-%d') <  dt.now():
-            messages.error(request, "Deadline must be after this day, sorry you can't reverse your mistakes :(")
+            return JsonResponse({"message" : "Deadline must be after this day, sorry you can't reverse your mistakes :("}, status=400)
         else:
+            if Project_list.objects.filter(name = request.POST.get('name')).exists():
+                print(Project_list.objects.filter(name = request.POST.get('name')))
+                return JsonResponse({"message" : "We are sorry, we already have project with same name :("}, status=400)
+
             jsonDec = json.decoder.JSONDecoder()
             project_list = Project_list()
             project_list.owner = request.user.username
@@ -43,7 +55,7 @@ def create_new(request):
                 old = jsonDec.decode(team_list.projects)
                 team_list.projects = json.dumps(old + [request.POST.get('name')])
             team_list.save()
-            return redirect('/projects')
+            return JsonResponse({"message" : request.POST.get('name')}, status=200)
 
     data = Teams_list.objects.all()
     match =[]
