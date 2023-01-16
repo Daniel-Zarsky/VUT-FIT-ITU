@@ -104,7 +104,7 @@ def addTask(request):
 # functions for rendering other pages
 def submit_task(request):
     # save task to database and send others
-    return render(request, 'to_do_list/task_list.html')
+    return redirect("/to_do_list")
 
 
 def home(request):
@@ -112,8 +112,8 @@ def home(request):
 
 
 def view_teams(request):
-    return render(request, 'teams/list.html')
+    return redirect("/teams")
 
 
 def view_projects(request):
-    return render(request, 'projects/list.html')
+    return redirect("/projects")
