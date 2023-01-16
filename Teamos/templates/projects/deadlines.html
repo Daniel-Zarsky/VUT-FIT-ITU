@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -61,12 +60,12 @@
             </div>
                 <div>
                     <label class="container">Show deadlines
-                      <input type="checkbox" checked="checked">
+                      <input id="deadlines_checkbox" type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
 
                     <label class="container">Show tasks
-                      <input type="checkbox" checked="checked">
+                      <input id="task_checkbox" type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
                     </div>
@@ -81,17 +80,20 @@
                 </li>
                 {% for data in list_data %}
                     {% if data.priority == -2 %}
-                        <li>
-                          <div class="priority--2">
+                        <li class = "">
+                          <div class="class_deadline priority--2">
                               <p>{{data.deadline_text}}</p>
                             <time>{{data.deadline}}</time> {{data.deadline_name}}
                           </div>
                         </li>
                     {% else %}
-                        <li>
-                          <div class="priority-{{data.priority}}">
+                        <li class = "">
+                          <div class="class_priority priority-{{data.priority}}">
                               <p>{{data.deadline_text}}</p>
                             <time>{{data.deadline}}</time> {{data.deadline_name}}
+                              {% if data.done is 1%}
+                                    <img alt="" src="{% static '/projects/images/hero.png' %}" style="width:180px;height:auto;">
+                              {% endif%}
                           </div>
                         </li>
                     {% endif %}
@@ -106,6 +108,41 @@
 
         </section>
     </main>
-    <script src="{% static 'projects/timeline.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const dead = document.querySelectorAll(".class_deadline");
+            const task = document.querySelectorAll(".class_priority");
+
+            const btn_task = document.querySelector("#task_checkbox")
+            const btn_dead = document.querySelector("#deadlines_checkbox")
+
+            btn_task.addEventListener('change', e => {
+                for(var j = 0;j < task.length; j++)
+                {
+                    task[j].style.display = 'block';
+                }
+            if(e.target.checked === false) {
+                for(var i = 0;i < task.length; i++)
+                {
+                    task[i].style.display = 'none';
+                }
+              }
+            });
+
+            btn_dead.addEventListener('change', e => {
+                for(var j = 0;j < dead.length; j++)
+                {
+                    dead[j].style.display = 'block';
+                }
+            if(e.target.checked === false) {
+                for(var i = 0;i < dead.length; i++)
+                {
+                    dead[i].style.display = 'none';
+                }
+              }
+            });
+        })
+    </script>
 </body>
 </html>
