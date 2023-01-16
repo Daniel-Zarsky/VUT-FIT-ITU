@@ -73,8 +73,14 @@ def addTask(request):
         project = request.POST.get('project')
         deadline = dt.strptime(request.POST.get('deadline'), "%Y-%m-%d").date()
         priority = request.POST.get('priority')
-
+        data = Project_list.objects.get(name=project)
         if int(priority) > 10 or int(priority) < 0:
+            return render(request, 'to_do_list/invalid_prio.html')
+
+        elif dt.strptime(request.POST.get('deadline'), '%Y-%m-%d') > dt.strptime(str(data.final_deadline), '%Y-%m-%d'):
+            return render(request, 'to_do_list/invalid_prio.html')
+
+        elif dt.strptime(request.POST.get('deadline'), '%Y-%m-%d') < dt.strptime(str(data.start_of_project), '%Y-%m-%d'):
             return render(request, 'to_do_list/invalid_prio.html')
 
         else:
