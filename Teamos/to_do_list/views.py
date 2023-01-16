@@ -4,12 +4,14 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Task
 from projects.models import Project_list
+from teams.models import Teams_list
+from user_home.models import User_acc
 from django.views import View
 from django.http import JsonResponse
 import json
 from datetime import datetime as dt
 from django.shortcuts import redirect
-
+import ast
 # main view of all the tasks with asynchronous communication
 
 class TaskUpdateDone(View):
@@ -91,14 +93,20 @@ def addTask(request):
         return JsonResponse({"instance": name}, status=200)
 
     else:
+        user = User_acc.objects.get(name=request.user.username)
+        user_team = ast.literal_eval(user.member)
+        projects =[]
 
-        match_2 = Project_list.objects.all()
-        match = []
-        for item in match_2:
-            if request.user.username in item.owner:
-                match = match + [item.name]
+        for team in user_team:
+            team_doc = Teams_list.objects.get(name=team)
+            if team_doc.projects is None or len(team_doc.projects) < 3:
+                continue
+            else:
+                for i in ast.literal_eval(team_doc.projects):
+                    projects.append(i)
 
-        return render(request, 'to_do_list/new_task.html', {'projects': match})
+
+        return render(request, 'to_do_list/new_task.html', {'projects': projects})
 
 
 # functions for rendering other pages
