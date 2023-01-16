@@ -59,7 +59,7 @@
       </div></header>
     <section class="u-align-center u-clearfix u-grey-10 u-section-1" id="sec-69a7">
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <a href="create_new" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">Create new project</a>
+        <a href="" class="create_new_project u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">Create new project</a>
           <p></p>
         <div class="container bootstrap snipets">
            <div class="row flow-offset-1">
@@ -74,6 +74,28 @@
            {% endfor %}
            </div>
          </div>
+          <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+          <script>
+              const button = document.querySelector(".create_new_project");
+
+              const check_teams = function (e){
+                  e.preventDefault();
+                  $.ajax({
+                      url: "/projects/validate_team",
+                      type: "GET",
+                      dataType: "json",
+                      success: function (resp){
+                          var address = "/projects/create_new";
+                          $(location).attr('href', address);
+                      },
+                      error: function (resp){
+                          window.alert(resp.responseJSON.message)
+                      }
+                  })
+              }
+              button.addEventListener("click", check_teams)
+
+          </script>
       </div>
 </section>
 </body></html>

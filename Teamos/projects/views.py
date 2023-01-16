@@ -29,6 +29,13 @@ def list_projects(request):
         out = Project_list.objects.filter(team__in=user_member)
     return render(request, 'projects/list.html', {'data': out})
 
+def validate_team(request):
+    user = User_acc.objects.get(name=request.user.username)
+    if user.member is None or len(user.member) < 3:
+        return JsonResponse({"message" : "Sorry, you are not assigned in any team, go create or join one\nOr you don't have any friends, go find some !"}, status=400)
+    else:
+        return JsonResponse({"message" : "success"}, status=200)
+
 
 def create_new(request):
     if request.POST.get('action') == 'post':
@@ -36,7 +43,6 @@ def create_new(request):
             return JsonResponse({"message" : "Deadline must be after this day, sorry you can't reverse your mistakes :("}, status=400)
         else:
             if Project_list.objects.filter(name = request.POST.get('name')).exists():
-                print(Project_list.objects.filter(name = request.POST.get('name')))
                 return JsonResponse({"message" : "We are sorry, we already have project with same name :("}, status=400)
 
             jsonDec = json.decoder.JSONDecoder()
@@ -103,7 +109,6 @@ def manage_deadlines(request):
     jsonDec = json.decoder.JSONDecoder()
 
     if request.POST.get('action') == 'post':
-        print(data.start_of_project)
         if dt.strptime(request.POST.get('date'), '%Y-%m-%d') <  dt.strptime(str(data.start_of_project), '%Y-%m-%d'):
             return JsonResponse({"message":"Deadline must be after day you started or are you hiding something? "}, status=400)
         elif dt.strptime(request.POST.get('date'), '%Y-%m-%d') > dt.strptime(str(data.final_deadline), '%Y-%m-%d'):
