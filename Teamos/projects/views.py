@@ -67,10 +67,11 @@ def create_new(request):
 
 def show_timeline(request):
     class time_line():
-        def __init__(self, deadline, deadline_name, deadline_text):
+        def __init__(self, deadline, deadline_name, deadline_text, priority):
             self.deadline = deadline
             self.deadline_name = deadline_name
             self.deadline_text = deadline_text
+            self.priority = priority
 
     jsonDec = json.decoder.JSONDecoder()
     project_name = request.GET.get('project_name')
@@ -85,11 +86,11 @@ def show_timeline(request):
         project_deadline_name = jsonDec.decode(project.deadlines_name)
 
         for dead,text,name in list(zip_longest(project_deadline, project_deadline_text, project_deadline_name)):
-            data.append(time_line(dead, text, name))
+            data.append(time_line(dead, text, name, -2))
 
 
     for item in tasks:
-        data.append(time_line(str(item.deadline)[:10], item.description, str(item.name)))
+        data.append(time_line(str(item.deadline)[:10], item.description, str(item.name), item.priority))
 
     data.sort(key=lambda x: x.deadline)
 
@@ -102,8 +103,11 @@ def manage_deadlines(request):
     jsonDec = json.decoder.JSONDecoder()
 
     if request.POST.get('action') == 'post':
-        if dt.strptime(request.POST.get('date'), '%Y-%m-%d') <  dt.now():
-            messages.error(request, "Deadline must be after this day, sorry you can't reverse your mistakes :(")
+        print(data.start_of_project)
+        if dt.strptime(request.POST.get('date'), '%Y-%m-%d') <  dt.strptime(str(data.start_of_project), '%Y-%m-%d'):
+            return JsonResponse({"message":"Deadline must be after day you started or are you hiding something? "}, status=400)
+        elif dt.strptime(request.POST.get('date'), '%Y-%m-%d') > dt.strptime(str(data.final_deadline), '%Y-%m-%d'):
+            return JsonResponse({"message":"Don't do that, why would you want to set deadline after projects deadline? Im confused, really ... \nAnd little disappointed"}, status=400)
         else:
             if data.deadlines is None:
                 data.deadlines = json.dumps([request.POST.get('date')])
