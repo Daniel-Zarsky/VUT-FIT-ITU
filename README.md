@@ -1,21 +1,22 @@
 # VUT-FIT-ITU
-## Teamos - web aplication for monitoring and management of team projects 
+## Teamos - webová aplikace pro management a monitoring týmových projektů
 
-### Autor
-- Daniel Zarsky <xzarsk04@stud.fit.vutbr.cz>
-- Samuel Simun <xsimun04@stud.fit.vutbr.cz>
+### Autoři
+- Daniel Žárský <xzarsk04@stud.fit.vutbr.cz>
+- Samuel Šimún <xsimun04@stud.fit.vutbr.cz>
 
-### Documentation 
-- Technical description(Czech):`./xzarsk04_zadani.pdf`
+### Documentace 
+- Technická zpráva:`./xzarsk04_zadani.pdf`
 
-### Task 
-- This project is oriented on building a user interface. 
-- We used HTML, CSS, Javascript and Jquerry for building the front-end and python based framework Django for back-end.
-- Important factor in evaluation was functional asynchronous communication.
-- Task(Czech): `./Zadání projektu do předmětu ITU 2022_2023.pdf`
+### Zadaní 
+- Cílem projektu bylo vytvořit pokročilé uživatelské rozhraní. 
+- Na front-end část aplikace byly použity technologie HTML, CSS, Javascript a Jquerry 
+- Back-end aplikace byl vytvořen pomocí frameworku Django.
+- Při implementaci byl kladen důraz na asynchronní komunikaci.
+- Zadání: `./Zadání projektu do předmětu ITU 2022_2023.pdf`
 
-### Contributors
-- Daniel Zarsky - module: `./Teamos/to_do_list`
-                - documentation 
-- Samuel Simun  - module: `./Teamos/projects` `./Teamos/teams` `./Teamos/user_home`  
+### Rozdělení práce
+- Daniel Zarsky - modul: `./Teamos/to_do_list`
+                - documentace
+- Samuel Simun  - modul: `./Teamos/projects` `./Teamos/teams` `./Teamos/user_home`  
                 
